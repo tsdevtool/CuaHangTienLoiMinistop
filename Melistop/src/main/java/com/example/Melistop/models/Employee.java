@@ -28,13 +28,13 @@ public class Employee {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "dayOfBirth")
+    @Column(name = "day_of_birth")
     private Date dayOfBirth;
 
-    @Column(name = "noIdentityCard")
+    @Column(name = "no_identity_card")
     private String noIdentityCard;
 
-    @Column(name = "numberPhone")
+    @Column(name = "number_phone")
     private String numberPhone;
 
     @Column(name = "address")
@@ -50,7 +50,7 @@ public class Employee {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @Column(name = "isLocked")
+    @Column(name = "is_locked")
     private Boolean isLocked;
 
     @OneToMany(mappedBy = "employee")

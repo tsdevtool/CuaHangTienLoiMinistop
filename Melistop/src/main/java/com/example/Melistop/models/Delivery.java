@@ -18,7 +18,7 @@ public class Delivery {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @Column(name = "deliverId")
+    @Column(name = "deliver_id")
     private Long deliverId;
 
     @Column(name = "status")
