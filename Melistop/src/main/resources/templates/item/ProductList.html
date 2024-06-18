@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
 <head>
-    <meta charset="UTF-8">
     <title>Danh sách sản phẩm</title>
     <link rel="stylesheet" href="output.css">
 </head>
 <body>
+<section layout:fragment="custom-content">
 {/* <!--    Product list--> */}
 <section class="py-24">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -121,6 +120,7 @@
             </a>
         </div>
     </div>
+</section>
 </section>
 </body>
 </html>
