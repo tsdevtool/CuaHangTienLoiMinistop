@@ -15,6 +15,11 @@ public class AdminController {
         return "admin/index";
     }
 
+    @GetMapping("/add")
+    public String hien() {
+        return "employee/employee-add";
+    }
+
 
 
 }
