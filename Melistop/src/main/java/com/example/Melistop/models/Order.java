@@ -46,4 +46,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<Delivery> deliveries;
+
+    @Column(name = "status")
+    private String status;
 }
