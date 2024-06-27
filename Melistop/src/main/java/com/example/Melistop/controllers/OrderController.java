@@ -17,6 +17,7 @@ public class OrderController {
 
     @GetMapping("/")
     public String showOrder(@RequestParam Long customerId, Model model){
+        model.addAttribute("product");
         model.addAttribute("cart", orderService.getOrderDertailByCustomerId(customerId));
         return "user/Cart";
     }

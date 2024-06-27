@@ -22,7 +22,7 @@ public class OrderService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    //Xem san pham trong gio hang cua user do
+    //Xem chi tiet san pham trong gio hang cua user do
     public List<OrderDetail> getOrderDertailByCustomerId(Long customerId){
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
@@ -32,6 +32,11 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("No pending order found"));
         return order.getOrderDetails();
     }
+
+//    //Xem thong tin san pham duoc lay trong gio hang
+//    public void test(){
+//        List<OrderDetail> test = getOrderDertailByCustomerId(1);
+//    }
     //Them san pham vao gio hang
     public void addProductToOrder(Long customerId, Long productId, Long quantity){
         //Kiem tra xem Customer da co thong tin gio hang nao chua neu chua thi them vao
