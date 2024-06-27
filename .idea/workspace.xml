@@ -5,16 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/CuaHangTienLoiMinistop.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/MvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/CategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/ImageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/CategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/add-category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/categories-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/edit-category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/oder/orderDetail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/oder/orderEdit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/oder/orderList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/add-product.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/update-product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/static/output.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/home/CategoryList.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/home/CategoryList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductList.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/Cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/Cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="Class" />
         <option value="HTML File" />
       </list>
     </option>
@@ -58,9 +77,35 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "Nghia",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/luuqu/source/DoAnWeb/CuaHangTienLoiMinistop"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\luuqu\source\DoAnWeb\CuaHangTienLoiMinistop\Melistop\src\main\resources\templates\admin" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MelistopApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.Melistop.MelistopApplication" />
+      <module name="Melistop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.Melistop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MelistopApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
