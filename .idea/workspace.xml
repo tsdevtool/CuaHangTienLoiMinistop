@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/main.html" afterDir="false" />
+    <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="update layoutadmin">
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/static/css/employee.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/employee/employee-add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/employee/employee-details.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/employee/employee-edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/employee/employee-list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/static/output.css" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/static/output.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/home/CategoryList.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/home/CategoryList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductList.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/item/ProductList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/Cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/Cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/models/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/models/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/EmployeeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,17 +56,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MelistopApplication.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Nghia",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MelistopApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Nghia&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Java-Web\CuaHangTienLoiMinistop\Melistop\src\main\resources\static\js" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,6 +81,39 @@
       <option name="presentableId" value="Default" />
       <updated>1718511005961</updated>
     </task>
+    <task id="LOCAL-00001" summary="add layoutadmin">
+      <option name="closed" value="true" />
+      <created>1718908936028</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718908936028</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update layoutadmin">
+      <option name="closed" value="true" />
+      <created>1719039756904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719039756904</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add layoutadmin" />
+    <MESSAGE value="update layoutadmin" />
+    <option name="LAST_COMMIT_MESSAGE" value="update layoutadmin" />
   </component>
 </project>

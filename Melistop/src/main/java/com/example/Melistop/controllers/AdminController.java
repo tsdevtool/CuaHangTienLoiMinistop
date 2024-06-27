@@ -2,24 +2,15 @@ package com.example.Melistop.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping("/mainAdmin")
+    @GetMapping
     public String admin() {
         return "admin/main";
     }
-
-    @GetMapping("/indexAdmin")
-    public String indexAdmin() {
-        return "admin/index";
-    }
-
-    @GetMapping("/add")
-    public String hien() {
-        return "employee/employee-add";
-    }
-
-
 
 }

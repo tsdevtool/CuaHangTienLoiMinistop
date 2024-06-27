@@ -1,11 +1,11 @@
 package com.example.Melistop.models;
 
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
-
 
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -37,9 +37,13 @@ public class Customer {
     @Column(name = "is_locked")
     private Boolean isLocked;
 
+    @Column(name = "registration_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date registrationDate;
+
     @OneToMany(mappedBy = "customer")
     private List<Order> orders;
+
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
-
 }

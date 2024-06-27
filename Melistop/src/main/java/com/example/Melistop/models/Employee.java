@@ -1,15 +1,15 @@
 package com.example.Melistop.models;
 
-import lombok.AllArgsConstructor;
-
-
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Setter
 @Entity
 @Table(name = "employees")
@@ -29,6 +29,7 @@ public class Employee {
     private String name;
 
     @Column(name = "day_of_birth")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dayOfBirth;
 
     @Column(name = "no_identity_card")
@@ -55,6 +56,4 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee")
     private List<Order> orders;
-
-
 }

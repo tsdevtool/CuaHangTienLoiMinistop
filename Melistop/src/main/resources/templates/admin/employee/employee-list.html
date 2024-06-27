@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layoutadmin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee List</title>
+    <link rel="stylesheet" href="/css/employee.css">
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="container mt-5">
+        <h2>Employee List</h2>
+        <a class="btn btn-primary mb-3" th:href="@{/admin/employees/add}">Add New Employee</a>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Account</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${employees == null or employees.isEmpty()}">
+                <td colspan="5">No employees found</td>
+            </tr>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.account}"></td>
+                <td th:text="${employee.role.roleName}"></td>
+                <td>
+                    <a class="btn btn-info btn-sm" th:href="@{/admin/employees/edit/{id}(id=${employee.id})}">Edit</a>
+                    <a class="btn btn-secondary btn-sm" th:href="@{/admin/employees/details/{id}(id=${employee.id})}">View</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{/admin/employees/delete/{id}(id=${employee.id})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

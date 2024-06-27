@@ -15,19 +15,35 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+        try {
+            return employeeRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving employees", e);
+        }
     }
 
     public Employee getEmployeeById(Long id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        return employee.orElse(null);
+        try {
+            Optional<Employee> employee = employeeRepository.findById(id);
+            return employee.orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving employee by id", e);
+        }
     }
 
     public void saveEmployee(Employee employee) {
-        employeeRepository.save(employee);
+        try {
+            employeeRepository.save(employee);
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving employee", e);
+        }
     }
 
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
+        try {
+            employeeRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting employee", e);
+        }
     }
 }

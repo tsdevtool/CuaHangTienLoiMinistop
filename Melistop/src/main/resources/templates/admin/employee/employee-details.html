@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layoutadmin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="/css/employee.css">
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="container mt-5">
+        <h2>Employee Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${employee.name}"></h5>
+                <p class="card-text"><strong>Account:</strong> <span th:text="${employee.account}"></span></p>
+                <p class="card-text"><strong>Date of Birth:</strong> <span th:text="${#dates.format(employee.dayOfBirth, 'yyyy-MM-dd')}"></span></p>
+                <p class="card-text"><strong>Identity Card Number:</strong> <span th:text="${employee.noIdentityCard}"></span></p>
+                <p class="card-text"><strong>Phone Number:</strong> <span th:text="${employee.numberPhone}"></span></p>
+                <p class="card-text"><strong>Address:</strong> <span th:text="${employee.address}"></span></p>
+                <p class="card-text"><strong>Sex:</strong> <span th:text="${employee.sex}"></span></p>
+                <p class="card-text"><strong>Nationality:</strong> <span th:text="${employee.nationality}"></span></p>
+                <p class="card-text"><strong>Role:</strong> <span th:text="${employee.role.roleName}"></span></p>
+                <p class="card-text"><strong>Locked:</strong> <span th:text="${employee.isLocked ? 'Yes' : 'No'}"></span></p>
+            </div>
+        </div>
+        <a class="btn btn-secondary mt-3" th:href="@{/admin/employees}">Back to </a>
+    </div>
+</div>
+</body>
+</html>

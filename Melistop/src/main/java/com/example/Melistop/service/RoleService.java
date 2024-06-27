@@ -14,6 +14,10 @@ public class RoleService {
     private RoleRepository roleRepository;
 
     public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+        try {
+            return roleRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving roles", e);
+        }
     }
 }
