@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{layoutadmin}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <h1>Edit Order</h1>
+    <form th:action="@{/orders/edit/{id}(id=${order.id})}" th:object="${order}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label>Address:</label>
+            <input type="text" th:field="*{addressDelivery}" />
+        </div>
+        <div>
+            <label>Note:</label>
+            <input type="text" th:field="*{note}" />
+        </div>
+        <div>
+            <label>Payment:</label>
+            <input type="text" th:field="*{payment.method}" />
+        </div>
+        <div>
+            <label>Delivery Time:</label>
+            <input type="datetime-local" th:field="*{timeDelivery}" />
+        </div>
+        <div>
+            <label>Employee:</label>
+            <input type="text" th:field="*{employee.name}" />
+        </div>
+        <div>
+            <label>Total Price:</label>
+            <input type="text" th:field="*{totalPrice}" />
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <a th:href="@{/orders}">Back to Orders</a>
+</div>
+</body>
+</html>
