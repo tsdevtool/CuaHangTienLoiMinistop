@@ -13,10 +13,10 @@ public class ProductCustomerController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products-customer")
+    @GetMapping("/")
     public String showProductListForCustomer(Model model){
         model.addAttribute("productList", productService.getAllProducts());
-        return "item/ProductList";
+        return "/item/ProductList";
 
     }
 }

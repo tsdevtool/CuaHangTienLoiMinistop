@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional
-public class CustomerService implements UserDetailsService {
+public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -54,52 +54,5 @@ public class CustomerService implements UserDetailsService {
         } catch (Exception e) {
             throw new RuntimeException("Error deleting customer", e);
         }
-    }
-
-//    @Autowired
-//    private CustomerRepository customerRepository;
-
-
-
-    public Customer register(Customer customer){
-        //Kiem tra xem da co tai khoan dung so dien thoai nay chua
-        //Neu co roi thi thong bao da co tai khoan roi
-        if(customerRepository.findByNumberPhone(customer.getNumberPhone()).isPresent()){
-            throw new RuntimeException("Số điện thoại đã được sử dụng");
-        }
-        customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
-        return customerRepository.save(customer);
-    }
-
-    public Customer login(String phoneNumber, String password){
-        //Lay thong tin nguoi dung voi so dien thoai da luu
-        //Neu khong co thi bao khong co tai khoan nay
-        //Neu co thi kiem tra password
-        Optional<Customer> customerOptional = customerRepository.findByNumberPhone(phoneNumber);
-        if(customerOptional.isPresent()){
-            //Kiem tra mat khau neu dung mat khau thi tra ve thong tin customer;
-            //Neu khong thi thong bao mat khau sai
-            Customer customer = customerOptional.get();
-            if(customer.getPassword().equals(new BCryptPasswordEncoder().encode(password))){
-                return customer;
-            }
-            throw new RuntimeException("Mật khẩu không đúng");
-        }else{
-            throw new RuntimeException("Không tìm thấy thông tin cho số điện thoại này");
-        }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = customerRepository.findByNumberPhone(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getNumberPhone())
-                .password(user.getPassword())
-                .authorities(user.getAuthorities())
-                .accountExpired(!user.isAccountNonExpired())
-                .accountLocked(!user.isAccountNonLocked())
-                .credentialsExpired(!user.isCredentialsNonExpired())
-                .disabled(!user.isEnabled())
-                .build();
     }
 }
