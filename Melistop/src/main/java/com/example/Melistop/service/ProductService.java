@@ -24,6 +24,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    //Lay danh sach tat ca san pham theo Category id
+    public List<Product> getAllProductByCategoryId(Long id){
+        return productRepository.findByCategoryId(id);
+    }
+
     // Retrieve a product by its id
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
