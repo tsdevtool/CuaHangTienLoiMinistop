@@ -3,7 +3,10 @@ package com.example.Melistop.service;
 import com.example.Melistop.models.Customer;
 import com.example.Melistop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import groovy.util.logging.Slf4j;
 import jakarta.transaction.Transactional;
@@ -15,13 +18,10 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     public List<Customer> getAllCustomers() {
         try {
@@ -67,7 +67,7 @@ public class CustomerService {
         if(customerRepository.findByNumberPhone(customer.getNumberPhone()).isPresent()){
             throw new RuntimeException("Số điện thoại đã được sử dụng");
         }
-        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        customer.setPassword(new BCryptPasswordEncoder().encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
 
@@ -80,12 +80,26 @@ public class CustomerService {
             //Kiem tra mat khau neu dung mat khau thi tra ve thong tin customer;
             //Neu khong thi thong bao mat khau sai
             Customer customer = customerOptional.get();
-            if(passwordEncoder.matches(password, customer.getPassword())){
+            if(customer.getPassword().equals(new BCryptPasswordEncoder().encode(password))){
                 return customer;
             }
             throw new RuntimeException("Mật khẩu không đúng");
         }else{
             throw new RuntimeException("Không tìm thấy thông tin cho số điện thoại này");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        var user = customerRepository.findByNumberPhone(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getNumberPhone())
+                .password(user.getPassword())
+                .authorities(user.getAuthorities())
+                .accountExpired(!user.isAccountNonExpired())
+                .accountLocked(!user.isAccountNonLocked())
+                .credentialsExpired(!user.isCredentialsNonExpired())
+                .disabled(!user.isEnabled())
+                .build();
     }
 }

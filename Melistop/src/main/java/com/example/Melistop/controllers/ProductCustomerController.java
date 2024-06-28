@@ -13,9 +13,9 @@ public class ProductCustomerController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products")
-    public String showProductList(Model model){
-        model.addAttribute("products", productService.getAllProducts());
+    @GetMapping("/products-customer")
+    public String showProductListForCustomer(Model model){
+        model.addAttribute("productList", productService.getAllProducts());
         return "item/ProductList";
 
     }

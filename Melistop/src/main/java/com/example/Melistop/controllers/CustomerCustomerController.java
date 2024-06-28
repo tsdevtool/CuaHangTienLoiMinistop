@@ -29,7 +29,7 @@ public class CustomerCustomerController {
         try {
             customerService.register(customer);
             model.addAttribute("message", "Đăng kí tài khoản thành công");
-            return "item/ProductList";
+            return "/item/ProductList";
         } catch (RuntimeException ex) {
             model.addAttribute("message", ex.getMessage());
             return "/login";
