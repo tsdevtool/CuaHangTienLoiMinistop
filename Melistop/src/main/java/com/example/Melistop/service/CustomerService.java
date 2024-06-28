@@ -5,15 +5,23 @@ import com.example.Melistop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import groovy.util.logging.Slf4j;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
+@Transactional
 public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Customer> getAllCustomers() {
         try {
@@ -51,13 +59,12 @@ public class CustomerService {
 //    @Autowired
 //    private CustomerRepository customerRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     public Customer register(Customer customer){
         //Kiem tra xem da co tai khoan dung so dien thoai nay chua
         //Neu co roi thi thong bao da co tai khoan roi
-        if(customerRepository.findByPhoneNumber(customer.getNumberPhone()).isPresent()){
+        if(customerRepository.findByNumberPhone(customer.getNumberPhone()).isPresent()){
             throw new RuntimeException("Số điện thoại đã được sử dụng");
         }
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
@@ -68,7 +75,7 @@ public class CustomerService {
         //Lay thong tin nguoi dung voi so dien thoai da luu
         //Neu khong co thi bao khong co tai khoan nay
         //Neu co thi kiem tra password
-        Optional<Customer> customerOptional = customerRepository.findByPhoneNumber(phoneNumber);
+        Optional<Customer> customerOptional = customerRepository.findByNumberPhone(phoneNumber);
         if(customerOptional.isPresent()){
             //Kiem tra mat khau neu dung mat khau thi tra ve thong tin customer;
             //Neu khong thi thong bao mat khau sai

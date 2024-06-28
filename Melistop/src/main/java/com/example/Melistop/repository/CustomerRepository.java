@@ -14,5 +14,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT COUNT(c) FROM Customer c WHERE c.registrationDate >= :startDate")
     long countNewCustomersSince(@Param("startDate") Date startDate);
 
-    Optional<Customer> findByPhoneNumber(String phoneNumber);
+    Optional<Customer> findByNumberPhone(String numberPhone);
 }
