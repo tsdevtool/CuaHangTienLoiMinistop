@@ -1,11 +1,9 @@
 package com.example.Melistop.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 @Setter
 @Getter
@@ -15,13 +13,22 @@ import java.util.List;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String customerName;
-    private String addressShip;
-    private String numberPhone;
-    private String email;
-    private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
+    private Double totalPrice;
+    private Boolean status;
+
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 }
