@@ -1,5 +1,6 @@
 package com.example.Melistop.repository;
-import com.example.Melistop.models.Category;
+
+import com.example.NguyenThanhSieu_9116.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

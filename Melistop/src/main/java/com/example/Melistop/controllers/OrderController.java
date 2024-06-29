@@ -1,69 +1,42 @@
 package com.example.Melistop.controllers;
 
-import com.example.Melistop.models.Order;
-import com.example.Melistop.service.OrderService;
+import com.example.NguyenThanhSieu_9116.model.CartItem;
+import com.example.NguyenThanhSieu_9116.service.CartService;
+import com.example.NguyenThanhSieu_9116.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.*;
 @Controller
+@RequestMapping("/order")
 public class OrderController {
-
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private CartService cartService;
 
-    @GetMapping("/orders")
-    public String getOrders(@RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date, Model model) {
-        List<Order> orders;
-        if (date == null) {
-            orders = orderService.getAllOrders(); // Lấy tất cả đơn hàng nếu không có tham số date
-        } else {
-            orders = orderService.getOrdersByDate(date);
+    @GetMapping("/checkout")
+    public String checkout(){
+        return "/cart/checkout";
+    }
+
+    @PostMapping("/submit")
+    public String submitOrder(String customerName,String numberPhone, String email, String addressShip, String description, Model model){
+        List<CartItem> cartItems = cartService.getCartItems();
+        if(cartItems.isEmpty()){
+            model.addAttribute("message","Your cart is empty");
+            return "redirect:/cart/checkout";
         }
-        model.addAttribute("orders", orders);
-        model.addAttribute("date", date);
-        return "oder/orderList";
+        orderService.createOrder(customerName, numberPhone, email, addressShip, description,cartItems);
+        return "redirect:/order/confirmation";
     }
 
-    @GetMapping("/orders/{id}")
-    public String getOrderById(@PathVariable("id") Long id, Model model) {
-        Optional<Order> order = orderService.getOrderById(id);
-        if (order.isPresent()) {
-            model.addAttribute("order", order.get());
-            return "oder/orderDetail";
-        } else {
-            // Handle order not found
-            return "redirect:/orders";
-        }
-    }
-
-    @GetMapping("/orders/edit/{id}")
-    public String editOrder(@PathVariable("id") Long id, Model model) {
-        Optional<Order> order = orderService.getOrderById(id);
-        if (order.isPresent()) {
-            model.addAttribute("order", order.get());
-            return "oder/orderEdit";
-        } else {
-            // Handle order not found
-            return "redirect:/orders";
-        }
-    }
-
-    @PostMapping("/orders/edit/{id}")
-    public String updateOrder(@PathVariable("id") Long id, @ModelAttribute("order") Order order) {
-        orderService.updateOrder(id, order);
-        return "redirect:/orders";
-    }
-
-    @GetMapping("/orders/delete/{id}")
-    public String deleteOrder(@PathVariable("id") Long id) {
-        orderService.deleteOrder(id);
-        return "redirect:/orders";
+    @GetMapping("/confirmation")
+    public String orderConfirmation(Model model){
+        model.addAttribute("message", "Your order has been successfully placed");
+        return "cart/order-confirmation";
     }
 }
