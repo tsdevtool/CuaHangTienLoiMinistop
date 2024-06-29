@@ -1,7 +1,7 @@
 package com.example.Melistop.controllers;
 
-import com.example.NguyenThanhSieu_9116.model.CartItem;
-import com.example.NguyenThanhSieu_9116.service.CartService;
+
+import com.example.Melistop.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

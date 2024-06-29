@@ -1,9 +1,9 @@
 package com.example.Melistop.service;
 
-import com.example.NguyenThanhSieu_9116.model.OrderDetail;
-import com.example.NguyenThanhSieu_9116.model.Product;
-import com.example.NguyenThanhSieu_9116.repository.OrderDetailRepository;
-import com.example.NguyenThanhSieu_9116.repository.ProductRepository;
+import com.example.Melistop.models.OrderDetail;
+import com.example.Melistop.models.Product;
+import com.example.Melistop.repository.OrderDetailRepository;
+import com.example.Melistop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

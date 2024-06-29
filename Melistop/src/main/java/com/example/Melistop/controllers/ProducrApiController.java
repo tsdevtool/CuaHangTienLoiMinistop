@@ -1,7 +1,8 @@
 package com.example.Melistop.controllers;
 
-import com.example.NguyenThanhSieu_9116.model.Product;
-import com.example.NguyenThanhSieu_9116.service.ProductService;
+
+import com.example.Melistop.models.Product;
+import com.example.Melistop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
