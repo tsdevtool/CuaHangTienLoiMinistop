@@ -1,29 +1,32 @@
 package com.example.Melistop.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 @Setter
 @Getter
-@RequiredArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
-@Table(name = "orderDetails")
+@Table(name = "order details")
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
+    private int quantity;
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product id")
     private Product product;
-
-    @Column(name = "quantity")
-    private Long quantity;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-
-    // getters and setters
+    @PrePersist
+    public void AdjustProductQuantity(){
+        if(product!=null)
+            product.reduceQuantity(quantity);
+    }
 }

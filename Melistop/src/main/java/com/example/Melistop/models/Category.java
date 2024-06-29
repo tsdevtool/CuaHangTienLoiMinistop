@@ -1,27 +1,23 @@
 package com.example.Melistop.models;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.List;
-
+import java.util.*;
 @Setter
 @Getter
+
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "categories")
+@Table(name  = "catrgories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @NotBlank(message="Tên là bắt buộc")
     private String name;
-
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
-
 }

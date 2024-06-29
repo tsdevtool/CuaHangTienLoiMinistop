@@ -1,44 +1,35 @@
 package com.example.Melistop.models;
 
+import javax.annotation.processing.Generated;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
-
 @Setter
 @Getter
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "description")
+    private double price;
     private String description;
+    private String image;
+    private int quantity;
 
-    @Column(name = "quantity")
-    private Long quantity;
 
-    @Column(name = "price")
-    private Double price;
-
-    @Column(name = "avatar")
-    private String avatar;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> images;
-
-    @OneToMany(mappedBy = "product")
-    private List<OrderDetail> orderDetails;
+    public void reduceQuantity(int quantity){
+        if(this.quantity >= quantity)
+            this.quantity -= quantity;
+        else
+            throw  new IllegalArgumentException("Not enough stock available");
+    }
 }
+
+

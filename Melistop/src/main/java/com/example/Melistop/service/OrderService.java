@@ -1,113 +1,60 @@
 package com.example.Melistop.service;
-import com.example.Melistop.models.Customer;
-import com.example.Melistop.models.Order;
-import com.example.Melistop.models.OrderDetail;
-import com.example.Melistop.models.Product;
-import com.example.Melistop.repository.CustomerRepository;
-import com.example.Melistop.repository.OrderRepository;
-import com.example.Melistop.repository.ProductRepository;
+
+import com.example.NguyenThanhSieu_9116.model.CartItem;
+import com.example.NguyenThanhSieu_9116.model.Order;
+import com.example.NguyenThanhSieu_9116.model.OrderDetail;
+import com.example.NguyenThanhSieu_9116.model.Product;
+import com.example.NguyenThanhSieu_9116.repository.OrderDetailRepository;
+import com.example.NguyenThanhSieu_9116.repository.OrderRepository;
+import com.example.NguyenThanhSieu_9116.repository.ProductRepository;
+import groovy.transform.AutoImplement;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class OrderService {
-
     @Autowired
     private OrderRepository orderRepository;
-
-    public List<Order> getOrdersByDate(Date date) {
-        return orderRepository.findByDate(date);
-    }
-
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
-
-    public Optional<Order> getOrderById(Long id) {
-        return orderRepository.findById(id);
-    }
-
-    public void updateOrder(Long id, Order orderDetails) {
-        Optional<Order> existingOrder = orderRepository.findById(id);
-        if (existingOrder.isPresent()) {
-            Order order = existingOrder.get();
-            // Update fields
-            order.setAddressDelivery(orderDetails.getAddressDelivery());
-            order.setNote(orderDetails.getNote());
-            order.setPayment(orderDetails.getPayment());
-            order.setTimeDelivery(orderDetails.getTimeDelivery());
-            order.setEmployee(orderDetails.getEmployee());
-            order.setTotalPrice(orderDetails.getTotalPrice());
-            // Save updated order
-            orderRepository.save(order);
-        }
-    }
-
-    public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
-    }
-
-
-
-//    @Autowired
-//    private OrderRepository orderRepository;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+    @Autowired
+    private CartService cartService;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private CustomerRepository customerRepository;
 
-    //Xem chi tiet san pham trong gio hang cua user do
-    public List<OrderDetail> getOrderDertailByCustomerId(Long customerId){
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-        Order order = customer.getOrders().stream()
-                .filter(o -> o.getStatus().equals("PENDING"))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No pending order found"));
-        return order.getOrderDetails();
-    }
+    @Transactional
+    public Order createOrder(String customerName,String numberPhone, String email,String Address, String note, List<CartItem> cartItems){
+        Order order = new Order();
+        order.setCustomerName(customerName);
+        order.setNumberPhone(numberPhone);
+        order.setEmail(email);
+        order.setAddressShip(Address);
+        order.setDescription(note);
+        order = orderRepository.save(order);
 
-    //    //Xem thong tin san pham duoc lay trong gio hang
-//    public void test(){
-//        List<OrderDetail> test = getOrderDertailByCustomerId(1);
-//    }
-    //Them san pham vao gio hang
-    public void addProductToOrder(Long customerId, Long productId, Long quantity){
-        //Kiem tra xem Customer da co thong tin gio hang nao chua neu chua thi them vao
-        Optional<Customer> customerOptional = customerRepository.findById(customerId);
-        if(customerOptional.isEmpty()){
-            throw new RuntimeException("Customer not found");
+        for(CartItem item:cartItems){
+            Product product = item.getProduct();
+            if(product.getQuantity() < item.getQuantity())
+                    throw new IllegalArgumentException("Not enough stock available for product" + product.getName());
+
+
+            product.setQuantity(product.getQuantity() - item.getQuantity());
+            productRepository.save(product);
+
+            OrderDetail detail = new OrderDetail();
+            detail.setOrder(order);
+            detail.setProduct(item.getProduct());
+            detail.setQuantity(item.getQuantity());
+            orderDetailRepository.save(detail);
         }
-
-        Customer customer = customerOptional.get();
-
-        //Lay don hang dau tien voi don hang co trang thai PENDING, neu khong se tao mot doi tuong Order moi
-        Order order = customer.getOrders().stream()
-                .filter(o -> o.getStatus().equals("PENDING"))
-                .findFirst()
-                .orElse(new Order());
-
-        //Set cac gia tri customer va status = peding
-        if(order.getId() == null){
-            order.setCustomer(customer);
-            order.setStatus("PENDING");
-            orderRepository.save(order);
-        }
-
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
-
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setProduct(product);
-        orderDetail.setQuantity(quantity);
-        orderDetail.setOrder(order);
-
-        //Them thong tin san pham vao gio hang
-        order.getOrderDetails().add(orderDetail);
-        orderRepository.save(order);
+        cartService.clearCart();
+        return order;
     }
 }

@@ -1,8 +1,8 @@
 package com.example.Melistop.controllers;
-import com.example.Melistop.models.Image;
-import com.example.Melistop.models.Product;
-import com.example.Melistop.service.CategoryService;
-import com.example.Melistop.service.ProductService;
+
+import com.example.NguyenThanhSieu_9116.model.Product;
+import com.example.NguyenThanhSieu_9116.service.CategoryService;
+import com.example.NguyenThanhSieu_9116.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,93 +17,72 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
-
     @Autowired
     private CategoryService categoryService;
 
     @GetMapping
-    public String showProductList(Model model) {
+    public String showProductList(Model model){
         model.addAttribute("products", productService.getAllProducts());
-        return "admin/products/product-list";
+        return "products/products-list";
     }
 
     @GetMapping("/add")
-    public String showAddForm(Model model) {
+    public String showAddForm(Model model){
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "admin/products/add-product";
+        return "/products/add-product";
     }
 
     @PostMapping("/add")
-    public String addProduct(@Valid @ModelAttribute Product product,
-                             BindingResult result,
-                             @RequestParam("avatarFile") MultipartFile avatarFile,
-                             @RequestParam("imageFiles") MultipartFile[] imageFiles,
-                             Model model) {
-        if (result.hasErrors()) {
+    public String addProduct(@Valid Product product, BindingResult result, @RequestParam("imageFile")MultipartFile imageFile, Model model){
+        if(result.hasErrors()){
             model.addAttribute("categories", categoryService.getAllCategories());
-            return "admin/products/add-product";
+            return "/products/add-product";
+//            return "/products/add-product";
         }
-
         try {
-            if (!avatarFile.isEmpty()) {
-                String avatarFileName = saveFile(avatarFile);
-                product.setAvatar(avatarFileName);
+            if (!imageFile.isEmpty()) {
+                String imageFileName = saveFile(imageFile);
+                product.setImage(imageFileName);
             }
 
-            Product savedProduct = productService.addProduct(product);
-
-            for (MultipartFile imageFile : imageFiles) {
-                if (!imageFile.isEmpty()) {
-                    String imageFileName = saveFile(imageFile);
-                    Image image = new Image();
-                    image.setUrl(imageFileName);
-                    image.setProduct(savedProduct);
-                    productService.addImage(image);
-                }
-            }
+            productService.addProduct(product);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+//        productService.addProduct(product);
         return "redirect:/products";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
+    @GetMapping("edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model){
+        Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id: " + id));
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "admin/products/update-product";
+        return "products/update-product";
     }
 
     @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable Long id,
-                                @Valid @ModelAttribute Product product,
-                                BindingResult result,
-                                @RequestParam("avatarFile") MultipartFile avatarFile,
-                                @RequestParam("imageFiles") MultipartFile[] imageFiles,
-                                Model model) {
-        if (result.hasErrors()) {
+    public String updateProduct(@PathVariable Long id, @Valid Product product, BindingResult result, @RequestParam("imageFile") MultipartFile imageFile, Model model){
+        if(result.hasErrors()){
             product.setId(id);
             model.addAttribute("categories", categoryService.getAllCategories());
-            return "admin/products/update-product";
+            return "/products/update-product";
         }
-
         try {
             Product existingProduct = productService.getProductById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
 
-            if (!avatarFile.isEmpty()) {
-                String avatarFileName = saveFile(avatarFile);
-                existingProduct.setAvatar(avatarFileName);
+            if (!imageFile.isEmpty()) {
+                String imageFileName = saveFile(imageFile);
+                existingProduct.setImage(imageFileName);
             }
 
             existingProduct.setName(product.getName());
@@ -112,46 +91,39 @@ public class ProductController {
             existingProduct.setCategory(product.getCategory());
             existingProduct.setQuantity(product.getQuantity());
 
-            Product updatedProduct = productService.updateProduct(existingProduct);
+            productService.updateProduct(existingProduct);
 
-            for (MultipartFile imageFile : imageFiles) {
-                if (!imageFile.isEmpty()) {
-                    String imageFileName = saveFile(imageFile);
-                    Image image = new Image();
-                    image.setUrl(imageFileName);
-                    image.setProduct(updatedProduct);
-                    productService.addImage(image);
-                }
-            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+//        try {
+//            if (!imageFile.isEmpty()) {
+//                product.setImage(imageFile.getBytes());
+//            }
+//            productService.updateProduct(product);
+//            redirectAttributes.addFlashAttribute("message", "Product updated successfully!");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            redirectAttributes.addFlashAttribute("message", "Failed to update product!");
+//        }
+//        productService.updateProduct(product);
         return "redirect:/products";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
+    public String deleteProduct(@PathVariable Long id){
         productService.deleteProductById(id);
         return "redirect:/products";
     }
-
-    @GetMapping("/detail/{id}")
-    public String showProductDetail(@PathVariable Long id, Model model) {
-        Product product = productService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
-        model.addAttribute("product", product);
-        return "admin/products/product-detail";
-    }
-
     private String saveFile(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-        Path filePath = Paths.get("uploads", fileName);
+        Path filePath = Paths.get("images", fileName);
         Files.createDirectories(filePath.getParent());
         Files.write(filePath, file.getBytes());
         return fileName;
     }
-
 
 }
