@@ -1,6 +1,6 @@
 package com.example.Melistop;
 
-import com.example.NguyenThanhSieu_9116.service.UserService;
+import com.example.Melistop.service.UserService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

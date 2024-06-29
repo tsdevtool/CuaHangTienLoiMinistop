@@ -1,12 +1,13 @@
 package com.example.Melistop.service;
 
-import com.example.NguyenThanhSieu_9116.model.CartItem;
-import com.example.NguyenThanhSieu_9116.model.Order;
-import com.example.NguyenThanhSieu_9116.model.OrderDetail;
-import com.example.NguyenThanhSieu_9116.model.Product;
-import com.example.NguyenThanhSieu_9116.repository.OrderDetailRepository;
-import com.example.NguyenThanhSieu_9116.repository.OrderRepository;
-import com.example.NguyenThanhSieu_9116.repository.ProductRepository;
+
+import com.example.Melistop.models.CartItem;
+import com.example.Melistop.models.Order;
+import com.example.Melistop.models.OrderDetail;
+import com.example.Melistop.models.Product;
+import com.example.Melistop.repository.OrderDetailRepository;
+import com.example.Melistop.repository.OrderRepository;
+import com.example.Melistop.repository.ProductRepository;
 import groovy.transform.AutoImplement;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class OrderService {
     private ProductRepository productRepository;
 
     @Transactional
-    public Order createOrder(String customerName,String numberPhone, String email,String Address, String note, List<CartItem> cartItems){
+    public Order createOrder(String customerName, String numberPhone, String email, String Address, String note, List<CartItem> cartItems){
         Order order = new Order();
         order.setCustomerName(customerName);
         order.setNumberPhone(numberPhone);

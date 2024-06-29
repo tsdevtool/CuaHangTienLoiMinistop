@@ -1,8 +1,8 @@
 package com.example.Melistop.service;
 
-import com.example.NguyenThanhSieu_9116.model.CartItem;
-import com.example.NguyenThanhSieu_9116.model.Product;
-import com.example.NguyenThanhSieu_9116.repository.ProductRepository;
+import com.example.Melistop.models.CartItem;
+import com.example.Melistop.models.Product;
+import com.example.Melistop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

@@ -1,7 +1,8 @@
 package com.example.Melistop.controllers;
 
-import com.example.NguyenThanhSieu_9116.model.User;
-import com.example.NguyenThanhSieu_9116.service.UserService;
+
+import com.example.Melistop.models.User;
+import com.example.Melistop.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;

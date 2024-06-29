@@ -1,6 +1,8 @@
 package com.example.Melistop.repository;
 
-import com.example.NguyenThanhSieu_9116.model.User;
+
+
+import com.example.Melistop.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

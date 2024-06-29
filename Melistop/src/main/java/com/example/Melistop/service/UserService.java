@@ -1,11 +1,10 @@
 package com.example.Melistop.service;
-import com.example.NguyenThanhSieu_9116.Role;
-//import com.example.NguyenThanhSieu_9116.model.Role;
-import com.example.NguyenThanhSieu_9116.model.User;
-import com.example.NguyenThanhSieu_9116.repository.IRoleRepository;
-import com.example.NguyenThanhSieu_9116.repository.IUserRepository;
 
 
+import com.example.Melistop.Role;
+import com.example.Melistop.models.User;
+import com.example.Melistop.repository.IRoleRepository;
+import com.example.Melistop.repository.IUserRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

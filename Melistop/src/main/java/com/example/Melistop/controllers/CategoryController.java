@@ -1,7 +1,8 @@
 package com.example.Melistop.controllers;
 
-import com.example.NguyenThanhSieu_9116.model.Category;
-import com.example.NguyenThanhSieu_9116.service.CategoryService;
+
+import com.example.Melistop.models.Category;
+import com.example.Melistop.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
