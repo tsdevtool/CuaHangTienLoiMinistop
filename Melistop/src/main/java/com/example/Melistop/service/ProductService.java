@@ -1,16 +1,15 @@
 package com.example.Melistop.service;
 
-import com.example.Melistop.models.OrderDetail;
-import com.example.Melistop.models.Product;
-import com.example.Melistop.repository.OrderDetailRepository;
+import com.example.Melistop.repository.ImageRepository;
 import com.example.Melistop.repository.ProductRepository;
-import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
+import com.example.Melistop.models.Image;
+import com.example.Melistop.models.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.validation.constraints.NotNull;
 
-import javax.swing.text.html.Option;
-import java.util.*;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,46 +17,56 @@ import java.util.Optional;
 @Transactional
 public class ProductService {
     private final ProductRepository productRepository;
-    private final OrderDetailRepository orderDetailRepository;
-    public List<Product> getAllProducts(){
+    private final ImageRepository imageRepository;
+
+    // Retrieve all products from the database
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-//    public Optional<Product> findById(Long id){
-//        return productRepository.findById(id);
-//    }
-    public Optional<Product> getProductById(Long id){
+    // Retrieve a product by its id
+    public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
-
-    public Product addProduct(Product product){
+    public List<Product> findProductsByName(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name);
+    }
+    // Add a new product to the database
+    public Product addProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public Product updateProduct(@NotNull Product product){
-        Product existingProduct = productRepository.findById(product.getId()).orElseThrow(() -> new IllegalStateException("Product with ID " + product.getId() + " does not exist."));
+    // Update an existing product
+    public Product updateProduct(@NotNull Product product) {
+        Product existingProduct = productRepository.findById(product.getId())
+                .orElseThrow(() -> new IllegalStateException("Product with ID " +
+                        product.getId() + " does not exist."));
         existingProduct.setName(product.getName());
         existingProduct.setPrice(product.getPrice());
         existingProduct.setDescription(product.getDescription());
-        existingProduct.setImage(product.getImage());
-        existingProduct.setQuantity(product.getQuantity());
         existingProduct.setCategory(product.getCategory());
+        existingProduct.setAvatar(product.getAvatar());
         return productRepository.save(existingProduct);
     }
 
-    public void deleteProductById(Long id){
-//        if(!productRepository.existsById(id)){
-//            throw new IllegalStateException("Product with ID " + id + " does not exist.");
-//        }
-
-        Product product= productRepository.findById(id).orElseThrow(() -> new IllegalStateException("Product with ID " + id + " does not exist."));
-
-        List<OrderDetail> orderDetails = orderDetailRepository.findByProductId(id);
-        for(OrderDetail orderDetail: orderDetails){
-            orderDetail.setProduct(null);
-            orderDetailRepository.save(orderDetail);
+    // Delete a product by its id
+    public void deleteProductById(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new IllegalStateException("Product with ID " + id + " does not exist.");
         }
         productRepository.deleteById(id);
     }
 
+    // Add a new image
+    public Image addImage(Image image) {
+        return imageRepository.save(image);
+    }
+
+    // Delete an image by its id
+    public void deleteImageById(Long id) {
+        if (!imageRepository.existsById(id)) {
+            throw new IllegalStateException("Image with ID " + id + " does not exist.");
+        }
+        imageRepository.deleteById(id);
+    }
 }

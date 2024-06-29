@@ -1,11 +1,14 @@
 package com.example.Melistop.models;
 
-import javax.annotation.processing.Generated;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
+
 @Setter
 @Getter
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
@@ -15,14 +18,16 @@ public class Product {
     private String name;
     private double price;
     private String description;
-    private String image;
+    private String  avatar;
     private int quantity;
-
-
-
     @ManyToOne
-    @JoinColumn(name = "category id")
+    @JoinColumn(name = "category_id")
     private Category category;
+
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images;
+
 
     public void reduceQuantity(int quantity){
         if(this.quantity >= quantity)
@@ -31,5 +36,3 @@ public class Product {
             throw  new IllegalArgumentException("Not enough stock available");
     }
 }
-
-
