@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout.html}">
 <head>
     <title>Đăng nhập</title>
@@ -15,7 +15,7 @@
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600 max-w">
                 Hoặc
-                <a href="#" class="ml-1 font-medium text-blue-600 hover:text-blue-500">
+                <a href="/register" class="ml-1 font-medium text-blue-600 hover:text-blue-500">
                     tạo tài khoản
                 </a>
             </p>
@@ -23,15 +23,15 @@
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <form class="space-y-6" action="#" method="POST">
+                <form class="space-y-6" th:action="@{/login}" method="post">
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email
+                        <label for="numberPhone" class="block text-sm font-medium text-gray-700">
+                            Số điện thoại
                         </label>
                         <div class="mt-1">
-                            <input id="email" name="email" type="email" autocomplete="email" required
+                            <input id="numberPhone" name="Phone Number" type="text" autocomplete="text" required
                                    class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                   placeholder="Nhập email"/>
+                                   placeholder="Nhập số điện thoại"/>
                         </div>
                     </div>
 
@@ -70,44 +70,47 @@
                             Đăng nhập
                         </button>
                     </div>
-                </form>
-                <div class="mt-6">
 
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
+                    <div class="mt-6">
+
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
                                     <span class="px-2 bg-gray-100 text-gray-500">
                                         Hoặc đăng nhập bằng
                                     </span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mt-6 grid grid-cols-3 gap-3">
-                        <div>
-                            <a href="#"
-                               class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                <img class="h-5 w-5" src="https://www.svgrepo.com/show/512120/facebook-176.svg"
-                                     alt=""/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#"
-                               class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                <img class="h-5 w-5" src="https://www.svgrepo.com/show/513008/twitter-154.svg"
-                                     alt=""/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#"
-                               class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                <img class="h-6 w-6" src="https://www.svgrepo.com/show/506498/google.svg"
-                                     alt=""/>
-                            </a>
+                        <div class="mt-6 grid grid-cols-3 gap-3">
+                            <div>
+                                <a th:href="@{/oauth2/authorization/facebook}"
+                                   class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/512120/facebook-176.svg"
+                                         alt=""/>
+                                </a>
+                            </div>
+
+<!--                            Chua co api-->
+                            <div>
+                                <a href="#"
+                                   class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/513008/twitter-154.svg"
+                                         alt=""/>
+                                </a>
+                            </div>
+                            <div>
+                                <a th:href="@{/oauth2/authorization/google}" class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    <img class="h-6 w-6" src="https://www.svgrepo.com/show/506498/google.svg"
+                                         alt=""/>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </div>

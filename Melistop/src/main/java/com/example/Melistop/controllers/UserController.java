@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(@NotNull Model model) {
-        model.addAttribute("user", new User()); // Thêm một đối tượng User mới vàomodel
+        model.addAttribute("user", new User()); // Thêm một đối tượng User mới vào model
         return "users/register";
     }
 

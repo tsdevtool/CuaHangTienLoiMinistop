@@ -19,7 +19,7 @@ import java.util.UUID;
 
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/")
 public class ProductController {
     @Autowired
     private ProductService productService;
