@@ -9,6 +9,7 @@
 </head>
 <body>
 <!--    HEADER-->
+<!--    HEADER-->
 <header class="shadow mb-2">
     <div class="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 md:mx-auto md:flex-row md:items-center">
         <a href="#" class="flex items-center whitespace-nowrap text-2xl font-black">
@@ -32,6 +33,9 @@
             <ul class="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Trang chủ</a></li>
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Sản phẩm</a></li>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/mainAdmin" >Quản Lý</a></li>
+                </div>
                 <li class="text-gray-600 md:mr-6 hover:text-blue-600">
                     <button type="button"
                             class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
@@ -43,50 +47,27 @@
                         Giỏ hàng
                     </button>
                 </li>
-                <li class="text-gray-600 hover:text-blue-600" sec:authorize="isAuthenticated()">
-                    <form action="/login">
-                        <button type="submit"
-                                class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
-                            <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                                          stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                </g>
-                            </svg>
-                            <p class="ml-2">Đăng nhập</p>
-                        </button>
-                    </form>
-                </li>
-                <li class="text-gray-600 hover:text-blue-600" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post">
-                        <button type="submit"
-                                class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
-                            <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                                          stroke="#ffffff" stroke-width="2" stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                </g>
-                            </svg>
-                            <p class="ml-2">Logout</p>
-                        </button>
-                    </form>
+                <li class="text-gray-600 hover:text-blue-600">
+                    <a href="/login"
+                       class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
+                        <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                      stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                        </svg>
+                        <p class="ml-2">Đăng nhập</p>
+                    </a>
                 </li>
             </ul>
         </nav>
-
     </div>
-  </div>
+</header>
 </nav>
 <div class="container mt-5">
-  <section layout:fragment="content">
+  <section layout:fragment="custom-content">
     <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
   </section>
 </div>
@@ -94,24 +75,62 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
 </script>
 </body>
-<footer style="background-color: #6db3295e; padding: 10px 0;" >
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <h3>Contact</h3>
-                <p>HostLine: 0394008828</p>
-                <p>Email: leduyluan2003@gmail.com</p>
-                <p>Address: 645/3/10 Le Van Viet, District 9</p>
+<!--    FOOTER-->
+<footer class="bg-gray-50">
+    <div class="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
+        <div class="max-w-sm">
+            <a href="#" class="flex items-center whitespace-nowrap text-2xl font-black">
+                            <span class="mr-2 text-4xl text-blue-600">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
+                                     alt="Ministop Logo"
+                                     class="mr-2 h-30 w-30"/>
+                            </span>
+                <span class="text-black">Ministop</span>
+            </a>
+            <div class="text-gray-500">
+                CÔNG TY TNHH MINISTOP
             </div>
-            <div class="col-sm-4">
-                <h3>Thank You</h3>
-                <p>We sincerely thank our customers for their trust and support. Your satisfaction is our pride and motivation to continuously improve and develop.</p>
+        </div>
+        <div class="">
+            <div class="mt-4 mb-2 font-medium xl:mb-4">Địa chỉ đăng ký kinh doanh</div>
+            <div class="text-gray-500">
+                215 Điện Biên Phủ, <br/>
+                Phường 15, Quận Bình Thạnh, <br/>
+                Thành phố Hồ Chí Minh, Việt Nam.
             </div>
-            <div class="col-sm-4">
-                <h3>Our Mission</h3>
-                <p>Our mission is to provide the highest quality products and services, contributing to the enhancement of community quality of life. We are committed to putting customers' interests first, operating transparently and sustainably.</p>
+        </div>
+        <div class="">
+            <div class="mt-4 mb-2 font-medium xl:mb-4">Các trang</div>
+            <nav aria-label="Footer Navigation" class="text-gray-500">
+                <ul class="space-y-3">
+                    <li><a class="hover:text-blue-600 hover:underline" href="#">Trang chủ</a></li>
+                    <li><a class="hover:text-blue-600 hover:underline" href="#">Sản phẩm</a></li>
+                    <li><a class="hover:text-blue-600 hover:underline" href="#">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="">
+            <div class="mt-4 mb-2 font-medium xl:mb-4">Đăng kí để nhận thông tin mới nhất</div>
+            <div class="flex flex-col">
+                <div class="mb-4">
+                    <input type="email"
+                           class="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                           placeholder="Email của bạn"/>
+                    <button class="block rounded-xl bg-blue-600 px-6 py-3 font-medium text-white">Đăng kí</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-gray-100">
+        <div class="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
+            <div class="">Copyright © MINISTOP VIETNAM. All rights reserved</div>
+            <div class="">
+                <a class="" href="#">Chính sách bảo mật</a>
+                <span>|</span>
+                <a class="" href="#">Điều khoản sử dụng</a>
             </div>
         </div>
     </div>
 </footer>
+</body>
 </html>

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -31,17 +31,17 @@ public class ProductController {
     @GetMapping
     public String showProductList(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "/products/product-list";
+        return "admin/products/product-list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/add-product")
     public String showAddForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "/products/add-product";
+        return "admin/products/add-product";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add-product")
     public String addProduct(@Valid @ModelAttribute Product product,
                              BindingResult result,
                              @RequestParam("avatarFile") MultipartFile avatarFile,
@@ -49,7 +49,7 @@ public class ProductController {
                              Model model) {
         if (result.hasErrors()) {
             model.addAttribute("categories", categoryService.getAllCategories());
-            return "/products/add-product";
+            return "admin/products/add-product";
         }
 
         try {
@@ -83,7 +83,7 @@ public class ProductController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "/products/update-product";
+        return "admin/products/update-product";
     }
 
     @PostMapping("/update/{id}")
@@ -96,7 +96,7 @@ public class ProductController {
         if (result.hasErrors()) {
             product.setId(id);
             model.addAttribute("categories", categoryService.getAllCategories());
-            return "/products/update-product";
+            return "admin/products/update-product";
         }
 
         try {
@@ -143,13 +143,13 @@ public class ProductController {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
-        return "/products/product-detail";
+        return "admin/products/product-detail";
     }
     @GetMapping("/search")
     public String searchProductsByName(@RequestParam("name") String name, Model model) {
         List<Product> searchResults = productService.findProductsByName(name);
         model.addAttribute("products", searchResults);
-        return "/products/product-list"; // Template dùng cho admin
+        return "admin/products/product-list"; // Template dùng cho admin
     }
     private String saveFile(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();

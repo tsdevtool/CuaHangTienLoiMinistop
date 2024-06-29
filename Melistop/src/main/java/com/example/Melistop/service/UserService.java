@@ -40,8 +40,7 @@ public class UserService implements UserDetailsService {
     }
     // Tải thông tin chi tiết người dùng để xác thực.
     @Override
-    public UserDetails loadUserByUsername(String username) throws
-            UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return org.springframework.security.core.userdetails.User
@@ -54,6 +53,7 @@ public class UserService implements UserDetailsService {
                 .disabled(!user.isEnabled())
                 .build();
     }
+
     // Tìm kiếm người dùng dựa trên tên đăng nhập.
     public Optional<User> findByUsername(String username) throws
             UsernameNotFoundException {

@@ -24,13 +24,13 @@ public class HomeController {
     @GetMapping
     public String showProductList(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "/products/home";
+        return "admin/products/home";
     }
     @GetMapping("/search")
     public String searchProductsByName(@RequestParam("name") String name, Model model) {
         List<Product> searchResults = productService.findProductsByName(name);
         model.addAttribute("products", searchResults);
-        return "/products/home"; // Template dùng cho người dùng
+        return "admin/products/home"; // Template dùng cho người dùng
     }
     @RequestMapping("/403")
     public String accessDenied() {

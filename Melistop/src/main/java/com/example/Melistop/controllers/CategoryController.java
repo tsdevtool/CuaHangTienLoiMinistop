@@ -25,7 +25,7 @@ public class CategoryController {
     @PostMapping("/categories/add")
     public String addCategory(@Valid Category category, BindingResult result) {
         if (result.hasErrors()) {
-            return "/categories/add-category";
+            return "admin/categories/add-category";
         }
         categoryService.addCategory(category);
         return "redirect:/categories";
@@ -35,7 +35,7 @@ public class CategoryController {
     public String listCategories(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "/categories/categories-list";
+        return "admin/categories/categories-list";
 
     }
     // GET request to show category edit form
@@ -45,7 +45,7 @@ public class CategoryController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:"
                         + id));
         model.addAttribute("category", category);
-        return "/categories/update-category";
+        return "admin/categories/update-category";
     }
     // POST request to update category
     @PostMapping("/categories/update/{id}")
@@ -53,7 +53,7 @@ public class CategoryController {
                                  BindingResult result, Model model) {
         if (result.hasErrors()) {
             category.setId(id);
-            return "/categories/update-category";
+            return "admin/categories/update-category";
         }
         categoryService.updateCategory(category);
         model.addAttribute("categories", categoryService.getAllCategories());
