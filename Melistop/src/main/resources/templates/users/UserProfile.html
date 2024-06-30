@@ -1,43 +1,120 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}">
 <head>
     <meta charset="UTF-8">
     <title>Hồ sơ người dùng</title>
     <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
-<section layout:fragment="custom-content" class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2>Hồ sơ người dùng</h2>
+<section layout:fragment="custom-content">
+    <div class="flex justify-center min-h-screen mx-4 my-10 mr-10 sm:mx-8 xl:mx-auto max-w-screen-xl">
+        <!-- Setting Sidebar -->
+        <div class="w-full mt-2 py-4 py-4 sm:w-1/3 lg:w-1/4 p-4">
+            <h1 class="border-b py-6 text-4xl font-semibold">Cài đặt</h1>
+            <ul class="mt-5">
+                <li class="cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">
+                    Tài khoản
+                </li>
+                <li class="cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">
+                    Đơn hàng
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="mt-2 w-full sm:w-2/3 lg:w-3/4 px-6 py-6 bg-gray-50 rounded-xl shadow">
+            <div class="pt-4">
+                <h1 class="py-2 text-2xl font-semibold">Cài đặt tài khoản</h1>
+            </div>
+            <hr class="mt-4 mb-8"/>
+
             <form>
+                <p class="py-2 text-xl font-semibold">Thông tin tài khoản</p>
                 <div class="form-group">
-                    <label for="name">Tên người dùng:</label>
-                    <input type="text" id="name" th:value="${user.name}" class="form-control" disabled>
+                    <label for="name" class="text-gray-600">Tên người dùng:</label>
+                    <input type="text" id="name" th:value="${user.name}" class="form-control font-bold text-gray-600"
+                           disabled>
                 </div>
                 <div class="form-group">
-                    <label for="username">Tên đăng nhập:</label>
-                    <input type="text" id="username" th:value="${user.username}" class="form-control" disabled>
+                    <label for="username" class="text-gray-600">Tên đăng nhập:</label>
+                    <input type="text" id="username" th:value="${user.username}"
+                           class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" th:value="${user.email}" class="form-control" disabled>
+                    <label for="email" class="text-gray-600">Email:</label>
+                    <input type="email" id="email" th:value="${user.email}" class="form-control font-bold text-gray-600"
+                           disabled>
                 </div>
                 <div class="form-group">
-                    <label for="address">Địa chỉ:</label>
-                    <input type="text" id="address" th:value="${user.address}" class="form-control" disabled>
+                    <label for="address" class="text-gray-600">Địa chỉ:</label>
+                    <input type="text" id="address" th:value="${user.address}"
+                           class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
-                    <label for="provider">Nhà cung cấp:</label>
-                    <input type="text" id="provider" th:value="${user.provider}" class="form-control" disabled>
+                    <label for="provider" class="text-gray-600">Nhà cung cấp:</label>
+                    <input type="text" id="provider" th:value="${user.provider}"
+                           class="form-control font-bold text-gray-600" disabled>
                 </div>
+            </form>
+            <hr class="mt-4 mb-8"/>
+
+            <p class="py-2 text-xl font-semibold">Mật khẩu</p>
+            <div class="flex flex-col sm:flex-row sm:items-center">
+                <div class="flex flex-col sm:flex-row sm:space-x-3">
+                    <label class="flex flex-col mt-2 mr-4">
+                        <span class="text-sm text-gray-500">Mẩu khẩu hiện tại</span>
+                        <input type="password" placeholder="***********"
+                               class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
+                    </label>
+                    <label class="flex flex-col mt-2 sm:mt-0">
+                        <span class="text-sm text-gray-500">Mật khẩu mới</span>
+                        <input type="password" placeholder="***********"
+                               class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
+                    </label>
+                </div>
+            </div>
+            <p class="mt-2">Bạn không nhớ mật khẩu?
+                <a href="#" class="text-sm font-semibold text-blue-600 underline decoration-2">
+                    Lấy lại mật khẩu
+                </a>
+            </p>
+            <button class="mt-4 rounded-lg bg-gray-900 px-4 py-2 text-white">Lưu mật khẩu</button>
+            <hr class="mt-4 mb-8"/>
+
+            <div>
+                <p class="py-2 text-xl font-semibold">Xóa tài khoản</p>
+                <p class="inline-flex items-center rounded-full bg-rose-100 py- text-rose-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    Cẩn trọng khi chọn
+                </p>
+                <p class="mt-2">Hãy đảm bảo rằng bạn đã thật sự chắc chắn muốn xóa tài khoản. Chúng tôi sẽ xóa sạch hoàn
+                    toàn dữ liệu của bạn. Không có cách nào để truy cập vào tài khoản của bạn sau này.
+                </p>
+                <button onclick=""
+                        class="mt-4 inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-base font-bold text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20"
+                         fill="currentColor">
+                        <path fill-rule="evenodd"
+                              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                    <a class="no-underline text-white">Xóa tài khoản</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
+
 <!--                <div class="form-group">-->
 <!--                    <label for="roles">Vai trò:</label>-->
 <!--                    <input type="text" id="roles" th:value="${#strings.listJoin(user.roles.stream().map(role -> role.name).collect(Collectors.toList()), ', ')}" class="form-control" disabled>-->
 <!--                </div>-->
-            </form>
-        </div>
-    </div>
-</section>
-</body>
-</html>
