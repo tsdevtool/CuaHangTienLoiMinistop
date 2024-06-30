@@ -53,7 +53,7 @@ public class UserManagementService {
             User existingUser = existingUserOpt.get();
             existingUser.setUsername(userDTO.getUsername());
             existingUser.setEmail(userDTO.getEmail());
-            existingUser.setPhone(userDTO.getPhone());
+            existingUser.setName(userDTO.getName());
             existingUser.setProvider(userDTO.getProvider());
             existingUser.setLocked(userDTO.isLocked());
             if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
@@ -76,7 +76,7 @@ public class UserManagementService {
         userDTO.setId(user.getId());
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
-        userDTO.setPhone(user.getPhone());
+        userDTO.setName(user.getName());
         userDTO.setProvider(user.getProvider());
         userDTO.setRoles(user.getRoles().stream().map(Role::getId).collect(Collectors.toSet()));
         userDTO.setLocked(user.isLocked());
@@ -88,7 +88,7 @@ public class UserManagementService {
         user.setId(userDTO.getId());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-        user.setPhone(userDTO.getPhone());
+        user.setName(userDTO.getName());
         user.setProvider(userDTO.getProvider());
         user.setLocked(userDTO.isLocked());
         user.setRoles(userDTO.getRoles().stream()

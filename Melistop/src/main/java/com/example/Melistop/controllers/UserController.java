@@ -36,6 +36,10 @@ public class UserController {
             model.addAttribute("errors", errors);
             return "users/register"; // Trả về lại view "register" nếu có lỗi
         }
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            model.addAttribute("errors", "Mật khẩu không khớp");
+            return "users/register";
+        }
         userService.save(user); // Lưu người dùng vào cơ sở dữ liệu
         userService.setDefaultRole(user.getUsername()); // Gán vai trò mặc định cho người dùng
         return "redirect:/login"; // Chuyển hướng người dùng tới trang "login"
