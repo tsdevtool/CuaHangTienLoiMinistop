@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
+<head>
 <head>
     <title>Chi tiết sản phẩm</title>
     <link rel="stylesheet" href="output.css">
 </head>
 <body>
 <section layout:fragment="custom-content">
-    {/* <!--    PRODUCT DETAIL--> */}
+    <!-- PRODUCT DETAIL -->
     <div class="container mx-auto px-4 py-10">
 
         <nav class="flex">
             <ol role="list" class="flex items-center">
-
                 <li class="text-left">
                     <div class="-m-1">
                         <a href="#"
@@ -20,7 +21,6 @@
                             Trang chủ </a>
                     </div>
                 </li>
-
                 <li class="text-left">
                     <div class="flex items-center">
                         <span class="mx-2 text-gray-400">/</span>
@@ -31,14 +31,13 @@
                         </div>
                     </div>
                 </li>
-
                 <li class="text-left">
                     <div class="flex items-center">
                         <span class="mx-2 text-gray-400">/</span>
                         <div class="-m-1">
                             <a href="#"
                                class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"
-                               aria-current="page"> cà phê </a>
+                               aria-current="page" th:text="${product.name}"> cà phê </a>
                         </div>
                     </div>
                 </li>
@@ -51,7 +50,7 @@
                     <div class="lg:order-2 lg:ml-5">
                         <div class="max-w-xl overflow-hidden rounded-lg">
                             <img class="h-full w-full max-w-full object-cover"
-                                 src="https://componentland.com/images/JHxMnVrtPMdcNU1s_7g7f.png"
+                                 th:src="@{'/uploads/' + ${product.avatar}}"
                                  alt=""/>
                         </div>
                     </div>
@@ -61,53 +60,26 @@
                             <button type="button"
                                     class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-900 text-center">
                                 <img class="h-full w-full object-cover"
-                                     src="https://componentland.com/images/JHxMnVrtPMdcNU1s_7g7f.png" alt=""/>
+                                     th:src="@{'/uploads/' + ${product.avatar}}" alt=""/>
                             </button>
-                            <button type="button"
-                                    class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                                <img class="h-full w-full object-cover"
-                                     src="https://componentland.com/images/JHxMnVrtPMdcNU1s_7g7f.png" alt=""/>
-                            </button>
-                            <button type="button"
-                                    class="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-transparent text-center">
-                                <img class="h-full w-full object-cover"
-                                     src="https://componentland.com/images/JHxMnVrtPMdcNU1s_7g7f.png" alt=""/>
-                            </button>
+                            <!-- Các ảnh khác nếu có -->
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                <h1 class="sm: text-2xl font-bold text-gray-900 sm:text-3xl">Túi cà phê Afro-Brazillian</h1>
+                <h1 class="sm: text-2xl font-bold text-gray-900 sm:text-3xl" th:text="${product.name}">Túi cà phê Afro-Brazillian</h1>
 
                 <div class="mt-5 flex items-center">
+                    <!-- Star rating -->
                     <div class="flex items-center">
                         <svg class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 20 20" fill="currentColor">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                                   class=""></path>
                         </svg>
-                        <svg class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                  class=""></path>
-                        </svg>
-                        <svg class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                  class=""></path>
-                        </svg>
-                        <svg class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                  class=""></path>
-                        </svg>
-                        <svg class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                  class=""></path>
-                        </svg>
+                        <!-- Các sao khác -->
                     </div>
                     <p class="ml-2 text-sm font-medium text-gray-500">1,209 đánh giá</p>
                 </div>
@@ -151,10 +123,9 @@
                     </div>
                 </div>
 
-
                 <div class="mt-10 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
                     <div class="flex items-end">
-                        <h1 class="text-3xl font-bold">160.000 vnđ</h1>
+                        <h1 class="text-3xl font-bold" th:text="${product.price} + ' vnđ'">160.000 vnđ</h1>
                         <span class="text-base">/ 1 món</span>
                     </div>
 
@@ -199,17 +170,9 @@
 
                 <div class="mt-8 flow-root sm:mt-12">
                     <h1 class="text-3xl font-bold">Đặc Trưng Của Cafe Arabica Bourbon Brazil</h1>
-                    <p class="mt-4">Bourbon có vị socola đặc trưng, ngọt ngào caramel & vị bánh mì nướng,
+                    <p class="mt-4" th:text="${product.description}">Bourbon có vị socola đặc trưng, ngọt ngào caramel & vị bánh mì nướng,
                         vị tròn và êm dịu, cảm giác ngon miệng như kem, độ chua cân bằng, vị béo ngậy, dư vị ngọt ngào
-                        của rượu.
-                        Đây là một giống arabica thuần chủng quý giá.</p>
-                    <h1 class="mt-8 text-3xl font-bold">Cafe Nhập Khẩu Từ Brazil</h1>
-                    <p class="mt-4">100% Cafe Arabica Bourbon Brazil</p>
-                    <p class="mt-4">Brazil không chỉ nổi tiếng về sản lượng cafe mà còn nổi tiếng về chất lượng.
-                        Cafe Brazil luôn đứng đầu thế giới nên thu hút được tất cả các thương hiệu cafe lớn, thu hút
-                        được mọi công nghệ trong ngành cafe, mọi loại gen quý hiếm.
-                        Thêm vào đó, chính phủ Brazil nghiêm túc phát triển việc trồng trọt loại cây này nên có những
-                        chính sách tuyệt vời cho nhà đầu tư, cho xuất khẩu.</p>
+                        của rượu. Đây là một giống arabica thuần chủng quý giá.</p>
                 </div>
             </div>
         </div>
