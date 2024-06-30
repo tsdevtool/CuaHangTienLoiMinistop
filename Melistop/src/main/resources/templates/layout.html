@@ -33,8 +33,10 @@
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Trang chủ</a></li>
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Sản phẩm</a></li>
                 <div sec:authorize="hasAuthority('ADMIN')">
-                    <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/mainAdmin" >Quản Lý</a></li>
+                    <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/admin" >Quản Lý</a></li>
                 </div>
+
+                <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/profile">Hồ Sơ</a></li>
                 <li class="nav-item d-flex align-items-center"
                     sec:authorize="isAuthenticated()">
                     <span class="navbar-text text-white">
