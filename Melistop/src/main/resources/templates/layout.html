@@ -10,13 +10,15 @@
 <!-- HEADER -->
 <header class="shadow mb-2">
     <div class="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 md:mx-auto md:flex-row md:items-center">
-        <a href="#" class="flex items-center whitespace-nowrap text-2xl font-black">
-            <span class="mr-2 text-4xl text-blue-600">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
-                     alt="Ministop Logo"
-                     class="mr-2 h-16 w-40"/>
-            </span>
-            <span class="text-blue">Ministop</span>
+
+        <a href="/" class="flex items-center whitespace-nowrap text-2xl font-black">
+                        <span class="mr-2 text-4xl text-blue-600">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
+                                 alt="Ministop Logo"
+                                 class="mr-2 h-16 w-40"/>
+                        </span>
+            <span class="text-blue">Melistop</span>
+
         </a>
         <input type="checkbox" class="peer hidden" id="navbar-open"/>
         <label class="absolute top-5 right-7 cursor-pointer md:hidden" for="navbar-open">
@@ -45,8 +47,19 @@
                     <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/admin">Quản Lý</a></li>
                 </div>
 
+                <li class="nav-item d-flex align-items-center"
+                    sec:authorize="isAuthenticated()">
+                    <span class="navbar-text text-white">
+                    Xin chào, <span sec:authentication="name" style="margin
+                    right: 20px;"></span>
+                    </span>
+                </li>
+                <li class="text-gray-600 md:mr-6 hover:text-blue-600" sec:authorize="isAuthenticated()">
+
+
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/profile">Hồ Sơ</a></li>
                 <li class="text-gray-600 md:mr-6 hover:text-blue-600">
+
                     <button type="button"
                             class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
@@ -57,7 +70,7 @@
                         Giỏ hàng
                     </button>
                 </li>
-                <li class="text-gray-600 hover:text-blue-600">
+                <li class="text-gray-600 hover:text-blue-600" sec:authorize="!isAuthenticated()">
                     <a href="/login"
                        class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
                         <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
@@ -70,6 +83,23 @@
                         </svg>
                         <p class="ml-2">Đăng nhập</p>
                     </a>
+                </li>
+
+                <li class="text-gray-600 hover:text-blue-600" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"
+                           class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
+                            <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                                          stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                            <p class="ml-2">Đăng xuất</p>
+                        </button>
+                    </form>
                 </li>
 
             </ul>
