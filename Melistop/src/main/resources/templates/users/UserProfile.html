@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Hồ sơ người dùng</title>
+    <link rel="stylesheet" href="/css/output.css">
+</head>
+<body>
+<section layout:fragment="custom-content" class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Hồ sơ người dùng</h2>
+            <form>
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập:</label>
+                    <input type="text" id="username" th:value="${user.username}" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" th:value="${user.email}" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" th:value="${user.phone}" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="provider">Nhà cung cấp:</label>
+                    <input type="text" id="provider" th:value="${user.provider}" class="form-control" disabled>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="roles">Vai trò:</label>-->
+<!--                    <input type="text" id="roles" th:value="${#strings.listJoin(user.roles.stream().map(role -> role.name).collect(Collectors.toList()), ', ')}" class="form-control" disabled>-->
+<!--                </div>-->
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
