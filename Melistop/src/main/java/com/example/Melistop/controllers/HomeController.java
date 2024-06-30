@@ -1,8 +1,10 @@
 package com.example.Melistop.controllers;
 
+import com.example.Melistop.models.Order;
 import com.example.Melistop.models.Product;
 import com.example.Melistop.models.User;
 import com.example.Melistop.service.CategoryService;
+import com.example.Melistop.service.OrderService;
 import com.example.Melistop.service.ProductService;
 
 import com.example.Melistop.service.UserService;
@@ -26,6 +28,9 @@ public class HomeController {
     private CategoryService categoryService; // Đảm bảo bạn đã inject CategoryService
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
     // Display a list of all products
     @GetMapping
     public String showProductList(Model model) {
@@ -67,6 +72,17 @@ public class HomeController {
         model.addAttribute("products", products);
         model.addAttribute("categories", categoryService.getAllCategories());
         return "admin/products/home"; // Tên của template HTML để hiển thị sản phẩm theo danh mục
+    }
+
+
+    @GetMapping("/orders")
+    public String showOrders(Principal principal, Model model) {
+        String username = principal.getName();
+        User user = userService.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username: " + username));
+        List<Order> orders = orderService.getOrdersByUser(user);
+        model.addAttribute("orders", orders);
+        return "users/UserOrders"; // Tên của template HTML để hiển thị các đơn hàng của người dùng
     }
 
 }
