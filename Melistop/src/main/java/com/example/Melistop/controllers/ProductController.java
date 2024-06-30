@@ -138,7 +138,7 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/products/detail/{id}")
     public String showProductDetail(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
