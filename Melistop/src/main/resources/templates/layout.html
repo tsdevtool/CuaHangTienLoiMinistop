@@ -3,14 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/output.css">
 </head>
 <body>
-<!-- HEADER -->
+<!--    HEADER-->
 <header class="shadow mb-2">
     <div class="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 md:mx-auto md:flex-row md:items-center">
-
         <a href="/" class="flex items-center whitespace-nowrap text-2xl font-black">
                         <span class="mr-2 text-4xl text-blue-600">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
@@ -18,7 +18,6 @@
                                  class="mr-2 h-16 w-40"/>
                         </span>
             <span class="text-blue">Melistop</span>
-
         </a>
         <input type="checkbox" class="peer hidden" id="navbar-open"/>
         <label class="absolute top-5 right-7 cursor-pointer md:hidden" for="navbar-open">
@@ -32,21 +31,10 @@
              class="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start">
             <ul class="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
                 <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Trang chủ</a></li>
-                <!-- Dropdown cho Sản phẩm -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-gray-600 text-xl md:mr-12 hover:text-blue-600" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sản phẩm
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li th:each="category : ${categories}">
-                            <a class="dropdown-item" th:href="@{'/products/by-category/' + ${category.id}}" th:text="${category.name}"></a>
-                        </li>
-                    </ul>
-                </li>
+                <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="#">Sản phẩm</a></li>
                 <div sec:authorize="hasAuthority('ADMIN')">
-                    <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/admin">Quản Lý</a></li>
+                    <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/mainAdmin" >Quản Lý</a></li>
                 </div>
-
                 <li class="nav-item d-flex align-items-center"
                     sec:authorize="isAuthenticated()">
                     <span class="navbar-text text-white">
@@ -55,11 +43,6 @@
                     </span>
                 </li>
                 <li class="text-gray-600 md:mr-6 hover:text-blue-600" sec:authorize="isAuthenticated()">
-
-
-                <li class="text-gray-600 text-xl md:mr-12 hover:text-blue-600"><a href="/profile">Hồ Sơ</a></li>
-                <li class="text-gray-600 md:mr-6 hover:text-blue-600">
-
                     <button type="button"
                             class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
@@ -84,11 +67,10 @@
                         <p class="ml-2">Đăng nhập</p>
                     </a>
                 </li>
-
                 <li class="text-gray-600 hover:text-blue-600" sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">
                         <button type="submit"
-                           class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
+                                class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-blue-600">
                             <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -101,34 +83,37 @@
                         </button>
                     </form>
                 </li>
-
             </ul>
         </nav>
     </div>
 </header>
+</nav>
 <div class="container mt-5">
     <section layout:fragment="custom-content">
         <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
     </section>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- FOOTER -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+</body>
+<!--    FOOTER-->
 <footer class="bg-gray-50">
     <div class="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div class="max-w-sm">
             <a href="#" class="flex items-center whitespace-nowrap text-2xl font-black">
-                <span class="mr-2 text-4xl text-blue-600">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
-                         alt="Ministop Logo"
-                         class="mr-2 h-30 w-30"/>
-                </span>
+                            <span class="mr-2 text-4xl text-blue-600">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MINISTOP_logo.svg/2560px-MINISTOP_logo.svg.png"
+                                     alt="Ministop Logo"
+                                     class="mr-2 h-30 w-30"/>
+                            </span>
                 <span class="text-black">Ministop</span>
             </a>
             <div class="text-gray-500">
                 CÔNG TY TNHH MINISTOP
             </div>
         </div>
-        <div>
+        <div class="">
             <div class="mt-4 mb-2 font-medium xl:mb-4">Địa chỉ đăng ký kinh doanh</div>
             <div class="text-gray-500">
                 215 Điện Biên Phủ, <br/>
@@ -136,7 +121,7 @@
                 Thành phố Hồ Chí Minh, Việt Nam.
             </div>
         </div>
-        <div>
+        <div class="">
             <div class="mt-4 mb-2 font-medium xl:mb-4">Các trang</div>
             <nav aria-label="Footer Navigation" class="text-gray-500">
                 <ul class="space-y-3">
@@ -146,7 +131,7 @@
                 </ul>
             </nav>
         </div>
-        <div>
+        <div class="">
             <div class="mt-4 mb-2 font-medium xl:mb-4">Đăng kí để nhận thông tin mới nhất</div>
             <div class="flex flex-col">
                 <div class="mb-4">
@@ -160,11 +145,11 @@
     </div>
     <div class="bg-gray-100">
         <div class="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
-            <div>Copyright © MINISTOP VIETNAM. All rights reserved</div>
-            <div>
-                <a href="#">Chính sách bảo mật</a>
+            <div class="">Copyright © MINISTOP VIETNAM. All rights reserved</div>
+            <div class="">
+                <a class="" href="#">Chính sách bảo mật</a>
                 <span>|</span>
-                <a href="#">Điều khoản sử dụng</a>
+                <a class="" href="#">Điều khoản sử dụng</a>
             </div>
         </div>
     </div>
