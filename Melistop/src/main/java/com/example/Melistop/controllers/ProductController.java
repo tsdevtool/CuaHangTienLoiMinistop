@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/admin/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -74,7 +74,7 @@ public class ProductController {
             e.printStackTrace();
         }
 
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/edit/{id}")
@@ -129,13 +129,13 @@ public class ProductController {
             e.printStackTrace();
         }
 
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/detail/{id}")
@@ -145,12 +145,14 @@ public class ProductController {
         model.addAttribute("product", product);
         return "admin/products/product-detail";
     }
+
     @GetMapping("/search")
     public String searchProductsByName(@RequestParam("name") String name, Model model) {
         List<Product> searchResults = productService.findProductsByName(name);
         model.addAttribute("products", searchResults);
         return "admin/products/product-list"; // Template dùng cho admin
     }
+
     private String saveFile(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
         Path filePath = Paths.get("uploads", fileName);

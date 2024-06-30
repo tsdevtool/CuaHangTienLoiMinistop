@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="~{layoutadmin}">
 <head>
     <meta charset="UTF-8">
-    <title>Categories List</title>
+    <title>User List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
@@ -12,23 +12,27 @@
 <body>
 <section layout:fragment="custom-content">
     <div class="container mt-5">
-        <h1>Categories List</h1>
-        <a class="btn btn-primary mb-3" th:href="@{/admin/categories/add}">Add New Category</a>
-        <table id="categoryTable" class="table table-striped">
+        <h1>List Customer</h1>
+        <a class="btn btn-primary mb-3" th:href="@{/admin/users/add}">Add User</a>
+        <table id="userTable" class="table table-striped">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="category : ${categories}">
-                <td th:text="${category.id}">1</td>
-                <td th:text="${category.name}">Category Name</td>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.username}">username</td>
+                <td th:text="${user.email}">email</td>
+                <td th:text="${user.phone}">phone</td>
                 <td>
-                    <a class="btn btn-success btn-sm" th:href="@{/admin/categories/edit/{id}(id=${category.id})}">Edit</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-warning" th:href="@{/admin/users/edit/{id}(id=${user.id})}">Edit</a>
+                    <a class="btn btn-danger" th:href="@{/admin/users/delete/{id}(id=${user.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -40,7 +44,7 @@
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#categoryTable').DataTable({
+        $('#userTable').DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,

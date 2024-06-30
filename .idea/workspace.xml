@@ -5,29 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="update layoutadmin">
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/DTO/RoleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/DTO/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/EmployeeManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/UserManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserManagementService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/employees/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/employees/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/employees/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/users/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/users/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/users/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/categories/add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/add-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/categories/categories-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/categories-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/categories/update-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/update-category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/ProductDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/add-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/add-product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/product-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/product-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/products-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/products-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/products/update-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/update-product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/static/css/layoutadmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/static/css/layoutadmin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/add-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/add-category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/categories-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/categories/categories-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/ProductDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/add-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/add-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/product-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/products-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/products-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/update-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/admin/products/update-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/cart/cart.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/cart/checkout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/cart/order-confirmation.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layoutadmin.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +48,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,11 +84,16 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "SiuTrangBanHang",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/luuqu/source/DoAnWeb/CuaHangTienLoiMinistop"
+    "last_opened_file_path": "E:/Java-Web/CuaHangTienLoiMinistop/Melistop/src/main/resources/templates/admin/employees"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Java-Web\CuaHangTienLoiMinistop\Melistop\src\main\resources\templates\admin\employees" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\CuaHangTienLoiMinistop\Melistop\src\main\resources\templates\admin\products" />
+      <recent name="E:\CuaHangTienLoiMinistop\Melistop\src\main\resources\templates\users" />
       <recent name="C:\Users\luuqu\source\DoAnWeb\CuaHangTienLoiMinistop\Melistop\src\main\resources\templates\admin" />
       <recent name="E:\Java-Web\CuaHangTienLoiMinistop\Melistop\src\main\resources\static\js" />
     </key>
