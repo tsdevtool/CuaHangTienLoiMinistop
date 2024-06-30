@@ -1,5 +1,6 @@
 package com.example.Melistop.DTO;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -16,18 +17,21 @@ public class UserDTO {
 
     @NotBlank(message = "Username is required")
     @Size(min = 1, max = 50, message = "Username must be between 1 and 50 characters")
-    private String username;
+    private String name;
 
     private String password;
 
-    @NotBlank(message = "Email is required")
     @Size(min = 1, max = 50, message = "Email must be between 1 and 50 characters")
     @Email
     private String email;
 
     @Length(min = 10, max = 10, message = "Phone must be 10 characters")
     @Pattern(regexp = "^[0-9]*$", message = "Phone must be number")
-    private String phone;
+    @NotBlank(message = "Phone is required")
+    private String username;
+
+    @Size(max = 250, message = "Địa chỉ nhà không quá 50 kí tự")
+    private String address;
 
     private String provider;
 

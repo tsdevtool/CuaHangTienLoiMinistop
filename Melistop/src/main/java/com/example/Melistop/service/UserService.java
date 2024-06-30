@@ -35,14 +35,14 @@ public class UserService implements UserDetailsService {
                     user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
                     userRepository.save(user);
                 },
-                () -> { throw new UsernameNotFoundException("User not found"); }
+                () -> { throw new UsernameNotFoundException("Không tìm thấy thông tin của người dùng"); }
         );
     }
     // Tải thông tin chi tiết người dùng để xác thực.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy thông tin của người dùng"));
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())

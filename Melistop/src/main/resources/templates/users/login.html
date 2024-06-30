@@ -23,9 +23,17 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <form class="space-y-6" th:action="@{/login}" method="post">
+
+                    <div th:if="${param.error}" class="alert alert-danger text-center">
+                        Invalid username and password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success text-center">
+                        You have been logged out.
+                    </div>
+
                     <div>
                         <label for="username" class="block text-sm font-medium text-gray-700">
-                            Tên đăng nhập
+                            Số điện thoại
                         </label>
                         <div class="mt-1">
                             <input id="username" name="username" type="text" autocomplete="username" required
