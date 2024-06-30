@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}">
 <head>
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="/css/output.css">
@@ -7,7 +8,7 @@
 <body>
 <section layout:fragment="custom-content">
     <!-- LOGIN -->
-    <div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                 Đăng nhập tài khoản của bạn
@@ -39,7 +40,8 @@
                             Mật khẩu
                         </label>
                         <div class="mt-1">
-                            <input id="password" name="password" type="password" autocomplete="current-password" required
+                            <input id="password" name="password" type="password" autocomplete="current-password"
+                                   required
                                    class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                    placeholder="Nhập mật khẩu"/>
                         </div>
@@ -84,13 +86,15 @@
                             <div>
                                 <a th:href="@{/oauth2/authorization/facebook}"
                                    class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/512120/facebook-176.svg" alt=""/>
+                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/512120/facebook-176.svg"
+                                         alt=""/>
                                 </a>
                             </div>
                             <div>
                                 <a th:href="@{/oauth2/authorization/twitter}"
                                    class="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/513008/twitter-154.svg" alt=""/>
+                                    <img class="h-5 w-5" src="https://www.svgrepo.com/show/513008/twitter-154.svg"
+                                         alt=""/>
                                 </a>
                             </div>
                             <div>
