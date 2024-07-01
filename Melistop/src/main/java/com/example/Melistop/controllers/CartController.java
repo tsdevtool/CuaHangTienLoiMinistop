@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -37,7 +39,7 @@ public class CartController {
     }
 
     @PostMapping("/addToCart/{productId}")
-    public String addToCart(@PathVariable Long productId, @RequestParam int quantity){
+    public String addToCart(@PathVariable Long productId, @RequestParam int quantity, RedirectAttributes redirectAttributes){
         // Lay thong tin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
@@ -51,6 +53,7 @@ public class CartController {
         // Them san pham vao gio hang
         cartService.addToCart(product, quantity, user);
 
+        redirectAttributes.addFlashAttribute("message", "Đã thêm " + product.getName() + " với số lượng " + quantity + " vào giỏ hàng");
         // Sau khi them san pham thanh cong thi ve trang chu
         return "redirect:/";
     }

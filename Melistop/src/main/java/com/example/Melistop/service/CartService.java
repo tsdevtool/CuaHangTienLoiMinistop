@@ -30,8 +30,11 @@ public class CartService{
             cartItem.setUser(user);
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
+
+            product.setQuantity(product.getQuantity() - quantity);
         }else{
             cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            product.setQuantity(product.getQuantity() - quantity);
         }
         cartItemRepository.save(cartItem);
     }
