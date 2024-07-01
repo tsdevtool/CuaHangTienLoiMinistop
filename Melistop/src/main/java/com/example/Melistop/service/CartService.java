@@ -5,6 +5,7 @@ import com.example.Melistop.models.Product;
 import com.example.Melistop.models.User;
 import com.example.Melistop.repository.CartItemRepository;
 import com.example.Melistop.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,24 @@ public class CartService{
     //Lay tat ca san pham theo nguoi dung
     public List<CartItem> getCartItemsForUser(User user){
         return cartItemRepository.findByUser(user);
+    }
+
+//    Xoa san pham trong cart
+    @Transactional
+    public void removeProductInCartOfUser(Long cartId, User user){
+        Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartId);
+        if(cartItemOptional.isPresent()){
+            CartItem cartItem = cartItemOptional.get();
+            if(cartItem.getUser().equals(user)){
+                Product product = cartItem.getProduct();
+                product.setQuantity(product.getQuantity() + cartItem.getQuantity());
+                cartItemRepository.deleteByIdAndUser(cartId,user);
+            }else{
+                throw  new IllegalArgumentException("Nguoi dung khong khop nhau");
+            }
+        }else{
+            throw new IllegalArgumentException("Không tìm thấy đơn hàng có id" + cartId);
+        }
+
     }
 }

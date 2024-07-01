@@ -71,4 +71,21 @@ public class CartController {
         model.addAttribute("quantity",cartService.getCartItemsForUser(user).size());
         return "users/cart";
     }
+
+    //Xoa don hang cua gio hang
+    @PostMapping("/removeFromCart/{cartItemId}")
+    public String removeFromCart(@PathVariable Long cartItemId, RedirectAttributes redirectAttributes){
+        // Lay thong tin user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        Optional<User> userOpt = userService.findByUsername(currentUsername);
+        User user = userOpt.orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng: " + currentUsername));
+
+        //Goi phuong thuc xoa san pham
+        cartService.removeProductInCartOfUser(cartItemId, user);
+
+        redirectAttributes.addFlashAttribute("message", "Đã xóa sản phẩm khỏi giỏ hàng");
+
+        return "redirect:/cart";
+    }
 }
