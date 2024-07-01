@@ -59,10 +59,11 @@ public class OrderService {
             detail.setQuantity(item.getQuantity());
             detail.setPrice(item.getQuantity()*item.getProduct().getPrice());
             orderDetailRepository.save(detail);
+            cartService.removeProductInCartOfUser2(item.getId(), user);
         }
 
         //Xoa san pham trong gio hang
-        cartService.clearCart();
+//        cartService.clearCart();
         return order;
     }
 }

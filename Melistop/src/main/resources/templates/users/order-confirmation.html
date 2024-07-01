@@ -1,18 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}">
 <head>
-    <title th:text="${title} ?: 'Your Cart'">Order Confirmation</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán thành công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .checkmark {
+            font-size: 48px;
+            color: green;
+        }
+        .order-number {
+            color: #33aa33;
+            font-weight: bold;
+        }
+        .order-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .order-link:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <section layout:fragment="custom-content">
-    <h1>Order Confirmation</h1>
-    <p th:text="${message}" class="d-inline-block">
-        <button type="button" class="btn btn-success btn-sm ml-2">&#10003;</button>
-    </p>
+    <div class="container">
+        <div class="checkmark">✔️</div>
+        <h2>Thanh toán thành công</h2>
+        <p th:text="${message}" class="d-inline-block">
+            <button type="button" class="btn btn-success btn-sm ml-2">&#10003;</button>
+        </p>
+        <a href="/" class="btn">Tiếp tục mua hàng</a>
+    </div>
 </section>
 </body>
 </html>
