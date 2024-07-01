@@ -7,10 +7,12 @@ import com.example.Melistop.models.User;
 import com.example.Melistop.repository.OrderDetailRepository;
 import com.example.Melistop.repository.OrderRepository;
 import jakarta.transaction.Transactional;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,10 +31,24 @@ public class OrderService {
         return orderRepository.findByUser(user);
     }
 
+    private double totalPrice(List<CartItem> cartItems){
+        double sum = 0;
+        for(CartItem cartItem: cartItems){
+            sum+=cartItem.getQuantity()*cartItem.getProduct().getPrice();
+        }
+        return sum;
+    }
     @Transactional
-    public Order createOrder(User user, List<CartItem> cartItems){
+    public Order createOrder(User user, String addAddress,String receiveTime, String description, String delivery, List<CartItem> cartItems){
         Order order = new Order();
         order.setUser(user);
+        order.setOrderDate(new Date());
+        order.setReceiveTime(receiveTime);
+        order.setAddressShip(addAddress);
+        order.setDescription(description);
+        order.setDelivery(delivery);
+        order.setStatus(false);
+        order.setTotalPrice(totalPrice(cartItems));
         order = orderRepository.save(order);
 
         for(CartItem item: cartItems){

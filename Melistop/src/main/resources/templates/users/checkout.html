@@ -40,15 +40,15 @@
 </head>
 <body>
 <section layout:fragment="custom-content">
-    <form th:action="@{/order/submit}" method="post">
+    <form th:action="@{/order/submit-order}" method="post">
         <div class="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-md">
             <div class="flex justify-between mb-4">
                 <!-- User Information Section -->
                 <div class="w-1/2 pr-4">
                     <h2 class="text-xl font-semibold mb-4">Thông tin người dùng</h2>
                     <div class="mb-4">
-                        <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Địa chỉ nhận hàng</label>
-                        <input type="address" id="address" placeholder="Nhập địa chỉ nhận hàng của bạn" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <label for="addressShip" class="block text-sm font-medium text-gray-700 mb-2">Địa chỉ nhận hàng</label>
+                        <input name="addressShip" type="text" id="addressShip" placeholder="Nhập địa chỉ nhận hàng của bạn" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
@@ -58,23 +58,23 @@
 
                     <div class="mb-4">
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Ghi chú</label>
-                        <input type="description" id="description" placeholder="Nhập ghi chú cho đơn hàng" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input  name="description" type="text" id="description" placeholder="Nhập ghi chú cho đơn hàng" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div class="mb-4">
                         <div class="flex items-center mb-2">
-                            <input type="radio" id="immediate-delivery" name="delivery-option" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                            <input type="radio" id="immediate-delivery" name="delivery" value="DELIVERY" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
                             <label for="immediate-delivery" class="ml-3 block text-sm font-medium text-gray-700">Đặt hàng - Giao hàng ngay</label>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" id="scheduled-delivery" name="delivery-option" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                            <input type="radio" id="scheduled-delivery" name="delivery" value="CARRY-OUT" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                             <label for="scheduled-delivery" class="ml-3 block text-sm font-medium text-gray-700">Nhận hàng - Nhận hàng hẹn giờ</label>
                         </div>
                     </div>
 
                     <div>
                         <label for="delivery-time" class="block text-sm font-medium text-gray-700 mb-2">Chọn giờ nhận hàng</label>
-                        <select id="delivery-time" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="delivery-time" name="receiveTime" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Chọn giờ nhận hàng</option>
                         </select>
                     </div>
@@ -84,18 +84,18 @@
             <!-- Payment Methods Section -->
             <h2 class="text-xl font-semibold mb-4">Phương thức thanh toán</h2>
 
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="flex items-center">
-                    <input type="radio" id="momo" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                    <label for="momo" class="ml-3 block text-sm font-medium text-gray-700 flex items-center">
-                        <img src="https://img.dominos.vn/icon-payment-method-mo-mo.png" alt="MoMo" class="mr-2"> Ví MoMo
-                    </label>
-                </div>
-                <div class="flex items-center">
-                    <input type="radio" id="cash" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                    <label for="cash" class="ml-3 block text-sm font-medium text-gray-700">Tiền mặt</label>
-                </div>
-            </div>
+<!--            <div class="grid grid-cols-2 gap-4 mb-4">-->
+<!--                <div class="flex items-center">-->
+<!--                    <input type="radio" id="momo" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">-->
+<!--                    <label for="momo" class="ml-3 block text-sm font-medium text-gray-700 flex items-center">-->
+<!--                        <img src="https://img.dominos.vn/icon-payment-method-mo-mo.png" alt="MoMo" class="mr-2"> Ví MoMo-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="flex items-center">-->
+<!--                    <input type="radio" id="cash" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>-->
+<!--                    <label for="cash" class="ml-3 block text-sm font-medium text-gray-700">Tiền mặt</label>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!-- Submit Button -->
             <div class="text-center">

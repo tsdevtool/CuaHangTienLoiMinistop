@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
@@ -29,8 +30,8 @@ public class OrderController {
         return "users/checkout";
     }
 
-    @GetMapping("/submit-order")
-    public String submitOrder(){
+    @PostMapping("/submit-order")
+    public String submitOrder(String addressShip, String receiveTime,String description,String delivery){
         // Lay thong tin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
@@ -40,7 +41,7 @@ public class OrderController {
         List<CartItem> cartItems = cartService.getCartItemsForUser(user);
         if(cartItems.isEmpty())
             return "redirect:/cart";
-        orderService.createOrder(user, cartItems);
+        orderService.createOrder(user, addressShip, receiveTime, description, delivery, cartItems);
         return "redirect:/order/confirmation";
     }
 
