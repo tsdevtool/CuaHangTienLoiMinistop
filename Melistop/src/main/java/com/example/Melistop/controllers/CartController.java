@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/addToCart/{productId}/{quantity}")
-    public String addToCart(@PathVariable Long productId, @PathVariable int quantity){
+    public String addToCart(@PathVariable Long productId, @PathVariable int quantity, RedirectAttributes redirectAttributes){
         //Lay thong tin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();;
@@ -34,6 +35,14 @@ public class CartController {
 
         //Lay thong tin san pham
         Product product = productService.getProductById(productId).orElseThrow(()-> new IllegalArgumentException("Không tìm thấy sản phẩm: " + productId));
+
+        // Kiểm tra số lượng yêu cầu không vượt quá số lượng hiện có của sản phẩm
+        if (quantity > product.getQuantity()) {
+            // Nếu số lượng yêu cầu lớn hơn số lượng hiện có, giảm số lượng xuống cận trên
+            quantity = product.getQuantity();
+            // Cập nhật thông báo lỗi
+            redirectAttributes.addFlashAttribute("errorMessage", "Số lượng vượt quá số lượng hiện có. Chỉ được thêm vào giỏ hàng " + quantity + " sản phẩm.");
+        }
 
         //Them san pham vao gio hang
         cartService.addToCart(product, quantity, user);

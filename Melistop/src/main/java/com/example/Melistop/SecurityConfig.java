@@ -38,19 +38,18 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/","/search", "/oauth/**", "/register",
-                                "/error","/","/uploads/**","/products/detail/**","/addToCart","/addToCart/**")
-                        .permitAll() // Cho phép truy cập không cần xác thực.
-
+                                "/error","/","/uploads/**","/products/detail/**")
+                        .permitAll()
+                                .requestMatchers("/addToCart/**")
+                                .permitAll()
+// Cho phép truy cập không cần xác thực.
                         .requestMatchers("/admin/products","/admin/products/**", "/categories", "/categories/**","admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
-                        .requestMatchers("/user/**","/addToCart","/addToCart/**")
-                        .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
                         .anyRequest().authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.
 
                 )
-
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login") // Trang chuyển hướng sau khi đăng xuất.

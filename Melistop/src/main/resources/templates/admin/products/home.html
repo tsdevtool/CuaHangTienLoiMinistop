@@ -60,7 +60,9 @@
                                             </div>
                                             <a th:href="@{'/products/detail/' + ${product.id}}"> </a>
                                             <a>
-                                                <form action="/addToCart/{productId}/{quantity}" method="post" sec:authorize="isAuthenticated()">
+                                                <form th:action="/addToCart/{productId}" method="post" sec:authorize="isAuthenticated()">
+                                                    <!-- CSRF Token -->
+                                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                                     <input type="number" name="quantity" th:max="${product.quantity}" min="1" value="1" class="form-control d-inline-block" style="width: 70px;">
                                                     <input type="hidden" name="productId" th:value="${product.id}">
                                                     <button type="submit" class="btn btn-primary">Add to Cart</button>
