@@ -22,22 +22,24 @@ public class UserService implements UserDetailsService {
     private IUserRepository userRepository;
     @Autowired
     private IRoleRepository roleRepository;
+
     // Lưu người dùng mới vào cơ sở dữ liệu sau khi mã hóa mật khẩu.
     public void save(@NotNull User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
+
     // Gán vai trò mặc định cho người dùng dựa trên tên người dùng.
     public void setDefaultRole(String username) {
         userRepository.findByUsername(username).ifPresentOrElse(
                 user -> {
-
                     user.getRoles().add(roleRepository.findRoleById(Role.USER.value));
                     userRepository.save(user);
                 },
                 () -> { throw new UsernameNotFoundException("Không tìm thấy thông tin của người dùng"); }
         );
     }
+
     // Tải thông tin chi tiết người dùng để xác thực.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -55,8 +57,17 @@ public class UserService implements UserDetailsService {
     }
 
     // Tìm kiếm người dùng dựa trên tên đăng nhập.
-    public Optional<User> findByUsername(String username) throws
-            UsernameNotFoundException {
+    public Optional<User> findByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
+    }
+
+    // Tìm kiếm người dùng dựa trên ID.
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    // Xóa người dùng theo ID.
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
     }
 }

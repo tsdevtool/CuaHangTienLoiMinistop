@@ -33,28 +33,23 @@
                 <p class="py-2 text-xl font-semibold">Thông tin tài khoản</p>
                 <div class="form-group">
                     <label for="name" class="text-gray-600">Tên người dùng:</label>
-                    <input type="text" id="name" th:value="${user.name}" class="form-control font-bold text-gray-600"
-                           disabled>
+                    <input type="text" id="name" th:value="${user.name}" class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
                     <label for="username" class="text-gray-600">Tên đăng nhập:</label>
-                    <input type="text" id="username" th:value="${user.username}"
-                           class="form-control font-bold text-gray-600" disabled>
+                    <input type="text" id="username" th:value="${user.username}" class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
                     <label for="email" class="text-gray-600">Email:</label>
-                    <input type="email" id="email" th:value="${user.email}" class="form-control font-bold text-gray-600"
-                           disabled>
+                    <input type="email" id="email" th:value="${user.email}" class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
                     <label for="address" class="text-gray-600">Địa chỉ:</label>
-                    <input type="text" id="address" th:value="${user.address}"
-                           class="form-control font-bold text-gray-600" disabled>
+                    <input type="text" id="address" th:value="${user.address}" class="form-control font-bold text-gray-600" disabled>
                 </div>
                 <div class="form-group">
                     <label for="provider" class="text-gray-600">Nhà cung cấp:</label>
-                    <input type="text" id="provider" th:value="${user.provider}"
-                           class="form-control font-bold text-gray-600" disabled>
+                    <input type="text" id="provider" th:value="${user.provider}" class="form-control font-bold text-gray-600" disabled>
                 </div>
             </form>
             <hr class="mt-4 mb-8"/>
@@ -63,14 +58,12 @@
             <div class="flex flex-col sm:flex-row sm:items-center">
                 <div class="flex flex-col sm:flex-row sm:space-x-3">
                     <label class="flex flex-col mt-2 mr-4">
-                        <span class="text-sm text-gray-500">Mẩu khẩu hiện tại</span>
-                        <input type="password" placeholder="***********"
-                               class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
+                        <span class="text-sm text-gray-500">Mật khẩu hiện tại</span>
+                        <input type="password" placeholder="***********" class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
                     </label>
                     <label class="flex flex-col mt-2 sm:mt-0">
                         <span class="text-sm text-gray-500">Mật khẩu mới</span>
-                        <input type="password" placeholder="***********"
-                               class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
+                        <input type="password" placeholder="***********" class="w-full rounded-md border-2 border-gray-300 py-2 px-4 text-base text-gray-700 focus:outline-none focus:border-blue-600"/>
                     </label>
                 </div>
             </div>
@@ -85,36 +78,25 @@
             <div>
                 <p class="py-2 text-xl font-semibold">Xóa tài khoản</p>
                 <p class="inline-flex items-center rounded-full bg-rose-100 py- text-rose-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20"
-                         fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                              clip-rule="evenodd"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                     </svg>
                     Cẩn trọng khi chọn
                 </p>
-                <p class="mt-2">Hãy đảm bảo rằng bạn đã thật sự chắc chắn muốn xóa tài khoản. Chúng tôi sẽ xóa sạch hoàn
-                    toàn dữ liệu của bạn. Không có cách nào để truy cập vào tài khoản của bạn sau này.
+                <p class="mt-2">Hãy đảm bảo rằng bạn đã thật sự chắc chắn muốn xóa tài khoản. Chúng tôi sẽ xóa sạch hoàn toàn dữ liệu của bạn. Không có cách nào để truy cập vào tài khoản của bạn sau này.
                 </p>
-                <button onclick=""
-                        class="mt-4 inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-base font-bold text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20"
-                         fill="currentColor">
-                        <path fill-rule="evenodd"
-                              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                              clip-rule="evenodd"/>
+
+
+                <a th:href="@{/profile/delete/{id}(id=${user.id})}" type="submit" class="mt-4 inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 px-6 py-3 text-base font-bold text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                     </svg>
-                    <a class="no-underline text-white">Xóa tài khoản</a>
-                </button>
+                    Xóa tài khoản
+                </a>
+
             </div>
         </div>
     </div>
-
 </section>
 </body>
 </html>
-
-<!--                <div class="form-group">-->
-<!--                    <label for="roles">Vai trò:</label>-->
-<!--                    <input type="text" id="roles" th:value="${#strings.listJoin(user.roles.stream().map(role -> role.name).collect(Collectors.toList()), ', ')}" class="form-control" disabled>-->
-<!--                </div>-->
