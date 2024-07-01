@@ -88,4 +88,20 @@ public class CartController {
 
         return "redirect:/cart";
     }
+    //Xoa hoac them 1 san pham don hang cua gio hang
+    @PostMapping("/reduceFromCart/{cartItemId}/{quantity}")
+    public String reduceFromCart(@PathVariable Long cartItemId,@PathVariable int quantity, RedirectAttributes redirectAttributes){
+        // Lay thong tin user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        Optional<User> userOpt = userService.findByUsername(currentUsername);
+        User user = userOpt.orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng: " + currentUsername));
+
+        //Goi phuong thuc xoa san pham
+        cartService.reduceProductInCartOfUser(cartItemId, user, quantity);
+
+//        redirectAttributes.addFlashAttribute("message", "Đã xóa sản phẩm khỏi giỏ hàng");
+
+        return "redirect:/cart";
+    }
 }
