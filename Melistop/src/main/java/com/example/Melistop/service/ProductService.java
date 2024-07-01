@@ -73,4 +73,11 @@ public class ProductService {
     public List<Product> findProductsByCategoryId(Long categoryId) {
         return productRepository.findByCategoryId(categoryId);
     }
+    public Product updateQuantity(Long id, int change) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        product.setQuantity(product.getQuantity() + change);
+        return productRepository.save(product);
+    }
+
 }
