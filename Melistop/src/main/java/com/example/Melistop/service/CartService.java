@@ -38,4 +38,9 @@ public class CartService{
         }
         cartItemRepository.save(cartItem);
     }
+
+    //Lay tat ca san pham theo nguoi dung
+    public List<CartItem> getCartItemsForUser(User user){
+        return cartItemRepository.findByUser(user);
+    }
 }

@@ -57,4 +57,18 @@ public class CartController {
         // Sau khi them san pham thanh cong thi ve trang chu
         return "redirect:/";
     }
+
+    //Hien thi gio hang
+    @GetMapping
+    public String showCart(Model model){
+        // Lay thong tin user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        Optional<User> userOpt = userService.findByUsername(currentUsername);
+        User user = userOpt.orElseThrow(() -> new IllegalArgumentException("Không tìm thấy người dùng: " + currentUsername));
+
+        model.addAttribute("cartItems", cartService.getCartItemsForUser(user));
+        model.addAttribute("quantity",cartService.getCartItemsForUser(user).size());
+        return "users/cart";
+    }
 }
