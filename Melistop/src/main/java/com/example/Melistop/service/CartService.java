@@ -63,4 +63,24 @@ public class CartService{
         }
 
     }
+
+    //    Xoa san pham trong cart
+    @Transactional
+    public void reduceProductInCartOfUser(Long cartId, User user, int quantity){
+        Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartId);
+        if(cartItemOptional.isPresent()){
+            CartItem cartItem = cartItemOptional.get();
+            if(cartItem.getUser().equals(user)){
+                Product product = cartItem.getProduct();
+                product.setQuantity(product.getQuantity() - quantity);
+                cartItem.setQuantity(cartItem.getQuantity() + quantity);
+                cartItemRepository.save(cartItem);
+            }else{
+                throw  new IllegalArgumentException("Nguoi dung khong khop nhau");
+            }
+        }else{
+            throw new IllegalArgumentException("Không tìm thấy đơn hàng có id" + cartId);
+        }
+
+    }
 }
