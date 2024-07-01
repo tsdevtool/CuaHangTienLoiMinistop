@@ -8,55 +8,60 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
 <section layout:fragment="custom-content">
   <div class="container mt-5">
     <h1>Products List</h1>
     <div>
-      <a th:href="@{/admin/products/add}" class="btn btn-primary mb-3">Add New Product</a>
+      <a th:href="@{/admin/products/add-product}" class="btn btn-primary mb-3">Add New Product</a>
     </div>
+    <form th:action="@{/admin/products/search}" method="get" class="mb-3">
+      <div class="input-group">
+        <input type="text" name="name" class="form-control" placeholder="Search by name...">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
     <table id="productTable" class="table table-striped">
       <thead>
       <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th>Quantity</th>
-        <th>Category</th>
+        <th>Description</th>
+        <th>Category Name</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="product : ${products}">
         <td th:text="${product.id}">1</td>
-        <td th:text="${product.name}">Name</td>
-        <td th:text="${product.price}">Price</td>
-        <td th:text="${product.quantity}">Quantity</td>
-        <td th:text="${product.category.name}">Category</td>
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.price}">Product Price</td>
+        <td th:text="${product.description}">Product Description</td>
+        <td th:text="${product.category.name}">Category Name</td>
         <td>
           <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="btn btn-success btn-sm">Edit</a>
           <a th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
           <a th:href="@{/admin/products/detail/{id}(id=${product.id})}" class="btn btn-info btn-sm">Details</a>
-          <a th:href="@{/admin/products/restock/{id}(id=${product.id})}" class="btn btn-warning btn-sm">Restock</a>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
-  <script>
-    $(document).ready(function() {
-        $('#productTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true
-        });
-    });
-  </script>
 </section>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script>
+  $(document).ready(function() {
+      $('#productTable').DataTable({
+          "paging": true,
+          "searching": true,
+          "ordering": true,
+          "info": true
+      });
+  });
+</script>
 </body>
 </html>

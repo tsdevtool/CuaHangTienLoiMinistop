@@ -35,14 +35,14 @@ public class HomeController {
     public String showProductList(Model model) {
         model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "admin/products/home";
+        return "users/products-list";
     }
 
     @GetMapping("/search")
     public String searchProductsByName(@RequestParam("name") String name, Model model) {
         List<Product> searchResults = productService.findProductsByName(name);
         model.addAttribute("products", searchResults);
-        return "admin/products/home"; // Template dùng cho người dùng
+        return "users/products-list"; // Template dùng cho người dùng
     }
 
     @RequestMapping("/403")
@@ -85,7 +85,7 @@ public class HomeController {
         List<Product> products = productService.findProductsByCategoryId(categoryId);
         model.addAttribute("products", products);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "admin/products/home"; // Tên của template HTML để hiển thị sản phẩm theo danh mục
+        return "users/products-list"; // Tên của template HTML để hiển thị sản phẩm theo danh mục
     }
 
     @GetMapping("/orders")
