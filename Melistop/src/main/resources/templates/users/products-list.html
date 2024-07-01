@@ -61,13 +61,18 @@
                                                     <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                 </ul>
                                             </div>
-                                            <form th:action="@{/cart/addToCart/{productId}(productId=${product.id})}" method="post" sec:authorize="isAuthenticated()">
-                                                <input type="number" name="quantity" th:max="${product.quantity}" min="1" value="1" class="form-control d-inline-block" style="width: 70px;">
-                                                <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                            </form>
+                                            <div th:if="${product.quantity > 1}">
+                                                <form th:action="@{/cart/addToCart/{productId}(productId=${product.id})}" method="post" sec:authorize="isAuthenticated()">
+                                                    <input type="number" name="quantity" th:max="${product.quantity}" min="1" value="1" class="form-control d-inline-block" style="width: 70px;">
+                                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                                </form>
 
-                                            <div sec:authorize="!isAuthenticated()">
-                                                <a href="/login" class="btn btn-primary">Log in to add to cart</a>
+                                                <div sec:authorize="!isAuthenticated()">
+                                                    <a href="/login" class="btn btn-primary">Log in to add to cart</a>
+                                                </div>
+                                            </div>
+                                            <div th:if="${product.quantity <= 1}">
+                                                <span class="text-danger">Hết hàng</span>
                                             </div>
                                         </div>
                                     </div>
