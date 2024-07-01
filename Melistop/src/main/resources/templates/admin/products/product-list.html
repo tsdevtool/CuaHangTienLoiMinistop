@@ -53,15 +53,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-<script>
-  $(document).ready(function() {
-      $('#productTable').DataTable({
-          "paging": true,
-          "searching": true,
-          "ordering": true,
-          "info": true
-      });
-  });
+<script th:if="${addToCartSuccess}">
+  setTimeout(function() {
+      alert("[Thành công] Đã thêm sản phẩm vào giỏ hàng!");
+  }, 1000); // Delay the alert for 1 second (optional)
 </script>
 </body>
 </html>

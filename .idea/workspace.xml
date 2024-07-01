@@ -6,14 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="update layoutadmin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/IUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/IUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/ProductDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/products-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/products-list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +18,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
         <option value="HTML File" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -60,7 +55,7 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "SiuTrangBanHang",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Java-Web/CuaHangTienLoiMinistop/Melistop/src/main/resources/templates/admin/employees"
+    "last_opened_file_path": "D:/Khanh/THLTJAVA/ThucHanhBuoi2/ThucHanhBuoi2/ThucHanhBuoi2/SpringBootJdk22"
   }
 }]]></component>
   <component name="RecentsManager">

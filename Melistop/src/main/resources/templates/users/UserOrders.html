@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}">
 <head>
     <meta charset="UTF-8">
     <title>Đơn hàng của tôi</title>
@@ -7,29 +8,149 @@
 </head>
 <body>
 <section layout:fragment="custom-content" class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h2>Đơn hàng của tôi</h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt hàng</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="order : ${orders}">
-                    <td th:text="${order.id}"></td>
-                    <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></td>
-                    <td th:text="${order.totalPrice}"></td>
-                    <td th:text="${order.status ? 'Đã giao' : 'Chưa giao'}"></td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="flex justify-center min-h-screen mx-4 my-10 mr-10 sm:mx-8 xl:mx-auto max-w-screen-xl">
+        <!-- Setting Sidebar -->
+        <div class="w-full mt-2 py-4 py-4 sm:w-1/3 lg:w-1/4 p-4">
+            <h1 class="border-b py-6 text-4xl font-semibold">Cài đặt</h1>
+            <ul class="mt-5">
+                <li class="cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">
+                    <a href="/profile">Tài khoản</a>
+                </li>
+                <li class="cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">
+                    <a href="/orders">Đơn hàng</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="mt-2 w-full sm:w-2/3 lg:w-3/4 px-6 py-6 bg-gray-50 rounded-xl shadow">
+            <div class="pt-4">
+                <h1 class="py-2 text-2xl font-semibold">Lịch sử đơn hàng</h1>
+            </div>
+            <hr class="mt-4 mb-8"/>
+
+            <div className="w-full h-full">
+                <div class="mx-auto max-w-screen-xl px-2">
+                    <!-- THANH TÌM KIẾM-->
+                    <div class="w-full">
+                        <div class="flex w-full flex-col items-center justify-between space-y-2 sm:flex-row sm:space-y-0">
+                            <form class="relative flex w-full max-w-2xl items-center">
+                                <svg class="absolute left-2 block h-5 w-5 text-gray-400"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     width="24"
+                                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8" class=""></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" class=""></line>
+                                </svg>
+                                <input type="name" name="search"
+                                       class="h-12 w-full border-b-gray-400 bg-transparent py-4 pl-12 text-sm outline-none focus:border-b-2"
+                                       placeholder="Tìm kiếm..."/>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- BẢNG-->
+                    <div class="mt-6 overflow-hidden rounded-xl bg-white px-6 shadow lg:px-4">
+                        <div className='flex flex-col space-y-2 overflow-y-auto max-h-[450px]'>
+                            <table class="min-w-full border-collapse border-spacing-y-2 border-spacing-x-2">
+                                <thead class="hidden border-b lg:table-header-group">
+                                <tr class="">
+                                    <td class="whitespace-normal py-4 text-sm font-semibold text-gray-800 sm:px-3">
+                                        Mã đơn hàng
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 h-3 w-3"
+                                             fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                                        </svg>
+                                    </td>
+
+                                    <td class="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">
+                                        Thời gian
+                                    </td>
+
+                                    <td class="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">
+                                        Tổng tiền
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="float-right mt-1 h-4 w-4"
+                                             fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                                        </svg>
+                                    </td>
+
+                                    <td class="whitespace-normal py-4 text-sm font-medium text-gray-500 sm:px-3">Trạng
+                                        thái
+                                    </td>
+                                </tr>
+                                </thead>
+
+                                <tbody class="bg-white lg:border-gray-300">
+                                <tr th:each="order : ${orders}">
+                                    <td class="whitespace-no-wrap py-4 text-left text-sm text-gray-600 sm:px-3 lg:text-left"
+                                        th:text="${order.id}"
+                                    >
+                                    <td class="mt-1 flex flex-col text-xs font-medium lg:hidden"
+                                        th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"
+                                    >
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-3 w-3" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    </td>
+
+                                    <td class="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-600 sm:px-3 lg:table-cell"
+                                        th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"
+                                    >
+                                    </td>
+
+                                    <td class="whitespace-no-wrap py-4 text-right text-sm text-gray-600 sm:px-3 lg:text-left"
+                                        th:text="${order.totalPrice}"
+                                    >
+                                        <span class="mt-1 ml-auto block w-fit whitespace-nowrap rounded-full bg-purple-100 px-2 py-0.5 text-center text-xs text-purple-800 lg:hidden">Action Required</span>
+                                    </td>
+
+                                    <td class="whitespace-no-wrap hidden py-4 text-sm font-normal text-gray-500 sm:px-3 lg:table-cell">
+                                        <span class="ml-2 mr-3 whitespace-nowrap rounded-full px-2 py-0.5">
+                                            <span th:text="${order.status ? 'Đã giao' : 'Chưa giao'}"></span>
+                                        </span>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </section>
 </body>
 </html>
+
+
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Mã đơn hàng</th>-->
+<!--        <th>Ngày đặt hàng</th>-->
+<!--        <th>Tổng tiền</th>-->
+<!--        <th>Trạng thái</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="order : ${orders}">-->
+<!--        <td th:text="${order.id}"></td>-->
+<!--        <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></td>-->
+<!--        <td th:text="${order.totalPrice}"></td>-->
+<!--        <td th:text="${order.status ? 'Đã giao' : 'Chưa giao'}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
