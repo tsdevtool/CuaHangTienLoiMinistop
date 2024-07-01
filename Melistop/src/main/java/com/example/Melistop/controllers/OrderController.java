@@ -1,9 +1,11 @@
 package com.example.Melistop.controllers;
 
 import com.example.Melistop.models.CartItem;
+import com.example.Melistop.models.Payment;
 import com.example.Melistop.models.User;
 import com.example.Melistop.service.CartService;
 import com.example.Melistop.service.OrderService;
+import com.example.Melistop.service.PaymentService;
 import com.example.Melistop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,14 +26,17 @@ public class OrderController {
     private CartService cartService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("/checkout")
-    public String checkout(){
+    public String checkout(Model model){
+        model.addAttribute("payments", paymentService.getAllPayment());
         return "users/checkout";
     }
 
     @PostMapping("/submit-order")
-    public String submitOrder(String addressShip, String receiveTime,String description,String delivery){
+    public String submitOrder(String addressShip, String receiveTime,String description,String delivery, Long payment){
         // Lay thong tin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
@@ -41,13 +46,18 @@ public class OrderController {
         List<CartItem> cartItems = cartService.getCartItemsForUser(user);
         if(cartItems.isEmpty())
             return "redirect:/cart";
-        orderService.createOrder(user, addressShip, receiveTime, description, delivery, cartItems);
+        orderService.createOrder(user, addressShip, receiveTime, description, delivery, payment, cartItems);
         return "redirect:/order/confirmation";
     }
 
     @GetMapping("/confirmation")
     public String orderConfirmation(Model model){
-        model.addAttribute("message","Cảm ơn bạn đã đặt hàng cho chúng tôi");
+        model.addAttribute("message","Cảm ơn bạn đã đặt hàng tại cửa hàng chúng tôi!");
         return "users/order-confirmation";
     }
+
+//    @GetMapping("/checkout")
+//    public void showPayment(Model model){
+//        model.addAttribute("payments", paymentService.getAllPayment());
+//    }
 }

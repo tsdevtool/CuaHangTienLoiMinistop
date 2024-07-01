@@ -1,11 +1,9 @@
 package com.example.Melistop.service;
 
-import com.example.Melistop.models.CartItem;
-import com.example.Melistop.models.Order;
-import com.example.Melistop.models.OrderDetail;
-import com.example.Melistop.models.User;
+import com.example.Melistop.models.*;
 import com.example.Melistop.repository.OrderDetailRepository;
 import com.example.Melistop.repository.OrderRepository;
+import com.example.Melistop.repository.PaymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +24,8 @@ public class OrderService {
     private OrderDetailRepository orderDetailRepository;
     @Autowired
     private CartService cartService;
-
+    @Autowired
+    private PaymentRepository paymentRepository;
     public List<Order> getOrdersByUser(User user) {
         return orderRepository.findByUser(user);
     }
@@ -39,7 +38,8 @@ public class OrderService {
         return sum;
     }
     @Transactional
-    public Order createOrder(User user, String addAddress,String receiveTime, String description, String delivery, List<CartItem> cartItems){
+    public Order createOrder(User user, String addAddress, String receiveTime, String description, String delivery, Long paymentId, List<CartItem> cartItems){
+
         Order order = new Order();
         order.setUser(user);
         order.setOrderDate(new Date());
@@ -49,6 +49,7 @@ public class OrderService {
         order.setDelivery(delivery);
         order.setStatus(false);
         order.setTotalPrice(totalPrice(cartItems));
+        order.setPayment(paymentRepository.findById(paymentId).get());
         order = orderRepository.save(order);
 
         for(CartItem item: cartItems){

@@ -48,7 +48,7 @@
                     <h2 class="text-xl font-semibold mb-4">Thông tin người dùng</h2>
                     <div class="mb-4">
                         <label for="addressShip" class="block text-sm font-medium text-gray-700 mb-2">Địa chỉ nhận hàng</label>
-                        <input name="addressShip" type="text" id="addressShip" placeholder="Nhập địa chỉ nhận hàng của bạn" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input required name="addressShip" type="text" id="addressShip" placeholder="Nhập địa chỉ nhận hàng của bạn" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
@@ -84,18 +84,18 @@
             <!-- Payment Methods Section -->
             <h2 class="text-xl font-semibold mb-4">Phương thức thanh toán</h2>
 
-<!--            <div class="grid grid-cols-2 gap-4 mb-4">-->
+            <div class="grid grid-cols-2 gap-4 mb-4" th:each="payment: ${payments}">
 <!--                <div class="flex items-center">-->
-<!--                    <input type="radio" id="momo" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">-->
+<!--                    <input type="radio" id="momo" name="paymentId" value="2" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">-->
 <!--                    <label for="momo" class="ml-3 block text-sm font-medium text-gray-700 flex items-center">-->
 <!--                        <img src="https://img.dominos.vn/icon-payment-method-mo-mo.png" alt="MoMo" class="mr-2"> Ví MoMo-->
 <!--                    </label>-->
 <!--                </div>-->
-<!--                <div class="flex items-center">-->
-<!--                    <input type="radio" id="cash" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>-->
-<!--                    <label for="cash" class="ml-3 block text-sm font-medium text-gray-700">Tiền mặt</label>-->
-<!--                </div>-->
-<!--            </div>-->
+                <div class="flex items-center">
+                    <input  required type="radio" id="cash" name="payment" th:value="${payment.id}"  class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                    <label for="cash" class="ml-3 block text-sm font-medium text-gray-700" th:text="${payment.name}">Tiền mặt</label>
+                </div>
+            </div>
 
             <!-- Submit Button -->
             <div class="text-center">
