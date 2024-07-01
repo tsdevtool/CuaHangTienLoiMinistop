@@ -41,7 +41,7 @@ public class User implements UserDetails {
     private String confirmPassword;
 
     //Email - khong bat buoc
-    @Column(name = "email", length = 50, unique = true)
+    @Column(name = "email", length = 50)
     @Size(max = 50, message = "Email không quá 50 kí tự")
     @Email
     private String email;
