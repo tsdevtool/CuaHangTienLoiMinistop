@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,11 +38,13 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/","/search", "/oauth/**", "/register",
-                                "/error","/","/uploads/**","/products/detail/**")
+                                "/error","/","/uploads/**","/products/detail/**","/addToCart","/addToCart/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
 
                         .requestMatchers("/admin/products","/admin/products/**", "/categories", "/categories/**","admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
+                        .requestMatchers("/user/**","/addToCart","/addToCart/**")
+                        .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
                         .anyRequest().authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.

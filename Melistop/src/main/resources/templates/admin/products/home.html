@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml" layout:decorate="~{layout.html}">
 <head>
     <title>Product List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -39,7 +40,7 @@
                                         <div class="img-box">
                                             <a th:href="@{/products/detail/{id}(id=${product.id})}">
                                                 <img th:src="@{'/uploads/' + ${product.avatar}}" class="img-responsive"
-                                                     alt="">
+                                                     alt="Ảnh minh họa của sản phẩm">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -59,7 +60,8 @@
                                             </div>
                                             <a th:href="@{'/products/detail/' + ${product.id}}"> </a>
                                             <a>
-                                                <form th:action="@{'/cart/add'}" method="post">
+                                                <form action="/addToCart/{productId}/{quantity}" method="post" sec:authorize="isAuthenticated()">
+                                                    <input type="number" name="quantity" th:max="${product.quantity}" min="1" value="1" class="form-control d-inline-block" style="width: 70px;">
                                                     <input type="hidden" name="productId" th:value="${product.id}">
                                                     <button type="submit" class="btn btn-primary">Add to Cart</button>
                                                 </form>
