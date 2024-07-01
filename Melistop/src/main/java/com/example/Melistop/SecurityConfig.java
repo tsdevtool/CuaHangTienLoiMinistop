@@ -42,6 +42,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/admin/products","/admin/products/**", "/categories", "/categories/**","admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
+                        .requestMatchers("/user/**", "/cart/**", "/addToCart/**")  // Thêm đường dẫn liên quan đến giỏ hàng
+                        .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
                         .anyRequest().authenticated() // Bất kỳ yêu cầu nào khác cần xác thực.
