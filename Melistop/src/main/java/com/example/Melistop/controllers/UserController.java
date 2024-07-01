@@ -17,12 +17,12 @@ public class UserController {
     private final UserService userService;
     @GetMapping("/login")
     public String login() {
-        return "users/login";
+        return "users/auth/login";
     }
     @GetMapping("/register")
     public String register(@NotNull Model model) {
         model.addAttribute("user", new User()); // Thêm một đối tượng User mới vào model
-        return "users/register";
+        return "users/auth/register";
     }
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") User user, // Validate đối tượng User
@@ -34,11 +34,11 @@ public class UserController {
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .toArray(String[]::new);
             model.addAttribute("errors", errors);
-            return "users/register"; // Trả về lại view "register" nếu có lỗi
+            return "users/auth/register"; // Trả về lại view "register" nếu có lỗi
         }
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             model.addAttribute("errors", "Mật khẩu không khớp");
-            return "users/register";
+            return "users/auth/register";
         }
         userService.save(user); // Lưu người dùng vào cơ sở dữ liệu
         userService.setDefaultRole(user.getUsername()); // Gán vai trò mặc định cho người dùng
