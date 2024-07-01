@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afc9b18-4142-4331-b2ad-28608c11b4a6" name="Changes" comment="update layoutadmin">
-      <change afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/repository/CartItemRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/controllers/HomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/java/com/example/Melistop/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/ProductDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/ProductDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserOrders.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserOrders.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/UserProfile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/products-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/Melistop/src/main/resources/templates/users/products-list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -55,7 +55,7 @@
                                                     <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                 </ul>
                                             </div>
-                                            <form th:action="@{/cart/addToCart/{productId}/{quantity}(productId=${product.id}, quantity=1)}" method="post" sec:authorize="isAuthenticated()">
+                                            <form th:action="@{/cart/addToCart/{productId}(productId=${product.id})}" method="post" sec:authorize="isAuthenticated()">
                                                 <input type="number" name="quantity" th:max="${product.quantity}" min="1" value="1" class="form-control d-inline-block" style="width: 70px;">
                                                 <button type="submit" class="btn btn-primary">Add to Cart</button>
                                             </form>

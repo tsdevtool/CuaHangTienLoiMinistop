@@ -22,7 +22,7 @@ public class CartService{
     private ProductRepository productRepository;
 
     //Them san pham vao gio hang
-    public void addToCart (Product product, int quantity, User user){
+    public void addToCart(Product product, int quantity, User user){
         CartItem cartItem = cartItemRepository.findByUserAndProduct(user, product);
 
         if(cartItem == null){
@@ -31,7 +31,7 @@ public class CartService{
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
         }else{
-            cartItem.setQuantity(cartItem.getQuantity());
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
         }
         cartItemRepository.save(cartItem);
     }

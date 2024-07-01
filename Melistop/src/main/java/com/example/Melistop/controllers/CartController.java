@@ -36,8 +36,8 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/addToCart/{productId}/{quantity}")
-    public String addToCart(@PathVariable Long productId, @PathVariable int quantity){
+    @PostMapping("/addToCart/{productId}")
+    public String addToCart(@PathVariable Long productId, @RequestParam int quantity){
         // Lay thong tin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
