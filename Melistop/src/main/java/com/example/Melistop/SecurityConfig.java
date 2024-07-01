@@ -40,7 +40,7 @@ public class SecurityConfig {
                                 "/error","/","/uploads/**","/products/detail/**")
                         .permitAll() // Cho phép truy cập không cần xác thực.
 
-                        .requestMatchers("/admin/products","/admin/products/**", "/categories", "/categories/**","admin/**")
+                        .requestMatchers("admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
@@ -59,7 +59,15 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login") // Trang đăng nhập.
                         .loginProcessingUrl("/login") // URL xử lý đăng nhập.
-                        .defaultSuccessUrl("/") // Trang sau đăng nhập thành công.
+                        .successHandler((request, response, authentication) -> { // Xử lý sau khi đăng nhập thành công.
+                            String redirectUrl = authentication.getAuthorities().stream()
+                                    .map(grantedAuthority -> grantedAuthority.getAuthority())
+                                    .filter(role -> role.equals("ADMIN") || role.equals("EMPLOYEE"))
+                                    .findFirst()
+                                    .map(role -> role.equals("ADMIN") ? "/admin" : "/employee")
+                                    .orElse("/");
+                            response.sendRedirect(redirectUrl);
+                        })
                         .failureUrl("/login?error") // Trang đăng nhập thất bại.
                         .permitAll()
                 )

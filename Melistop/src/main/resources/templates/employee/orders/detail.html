@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layoutemployee}">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="custom-content">
+    <div class="container mt-5">
+        <h2>Order Details</h2>
+        <div>
+            <p><strong>ID:</strong> <span th:text="${order.id}"></span></p>
+            <p><strong>Order Date:</strong> <span th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p><strong>Total Price:</strong> <span th:text="${order.totalPrice}"></span></p>
+            <p><strong>Status:</strong> <span th:text="${order.status ? 'Delivered' : 'Pending'}"></span></p>
+        </div>
+
+        <h3>Order Items:</h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="detail : ${order.orderDetails}">
+                <td th:text="${detail.product.id}"></td>
+                <td th:text="${detail.product.name}"></td>
+                <td th:text="${detail.quantity}"></td>
+                <td th:text="${detail.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-secondary" th:href="@{/employee/orders/list}">Back to Orders List</a>
+    </div>
+</section>
+</body>
+</html>

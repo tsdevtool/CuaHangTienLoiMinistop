@@ -1,4 +1,5 @@
 package com.example.Melistop.service;
+
 import com.example.Melistop.DTO.UserDTO;
 import com.example.Melistop.models.Role;
 import com.example.Melistop.models.User;
@@ -23,6 +24,8 @@ public class UserManagementService {
     @Autowired
     private RoleRepository roleRepository;
 
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public List<UserDTO> findAllUsers() {
         List<User> users = userRepository.findAll();
         return users.stream().map(this::convertToDTO).collect(Collectors.toList());
@@ -39,8 +42,11 @@ public class UserManagementService {
     }
 
     public void saveUser(UserDTO userDTO) {
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+            throw new IllegalArgumentException("Password and Confirm Password do not match");
+        }
         User user = convertToEntity(userDTO);
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName("ROLE_USER"));
         user.setRoles(roles);
@@ -56,9 +62,16 @@ public class UserManagementService {
             existingUser.setName(userDTO.getName());
             existingUser.setProvider(userDTO.getProvider());
             existingUser.setLocked(userDTO.isLocked());
+
+            // Kiểm tra nếu mật khẩu mới được cung cấp
             if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
-                existingUser.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+                if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+                    throw new IllegalArgumentException("Password and Confirm Password do not match");
+                }
+                existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                existingUser.setConfirmPassword(passwordEncoder.encode(userDTO.getConfirmPassword()));
             }
+
             Set<Role> roles = userDTO.getRoles().stream()
                     .map(roleId -> roleRepository.findById(roleId).orElseThrow(() -> new IllegalStateException("Role not found")))
                     .collect(Collectors.toSet());

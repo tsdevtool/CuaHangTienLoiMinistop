@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layoutadmin}">
+      layout:decorate="~{layoutemployee}">
 <head>
     <meta charset="UTF-8">
-    <title>Categories List</title>
+    <title>Completed Orders</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
@@ -15,23 +15,32 @@
 <body>
 <section layout:fragment="custom-content">
     <div class="container mt-5">
-        <h1>Categories List</h1>
-        <a class="btn btn-primary mb-3" th:href="@{/admin/categories/add}">Add New Category</a>
-        <table id="categoryTable" class="table table-striped">
+        <h1>Completed Orders</h1>
+        <table id="ordersTable" class="table table-striped">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>User</th>
+                <th>Order Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Details</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="category : ${categories}">
-                <td th:text="${category.id}">1</td>
-                <td th:text="${category.name}">Category Name</td>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}">1</td>
+                <td th:text="${order.user.username}">User</td>
+                <td th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}">01/01/2024</td>
+                <td th:text="${order.totalPrice}">100.0</td>
                 <td>
-                    <a class="btn btn-success btn-sm" th:href="@{/admin/categories/edit/{id}(id=${category.id})}">Edit</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{/admin/categories/delete/{id}(id=${category.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <form th:action="@{'/employee/orders/status/' + ${order.id}}" method="post">
+                        <input type="hidden" name="source" value="list"/>
+                        <input type="checkbox" name="status" th:checked="${order.status}" onchange="this.form.submit()">
+                    </form>
+                </td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/employee/orders/detail/{id}(id=${order.id})}">View Details</a>
                 </td>
             </tr>
             </tbody>
@@ -39,7 +48,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#categoryTable').DataTable({
+            $('#ordersTable').DataTable({
                 "paging": true,
                 "searching": true,
                 "ordering": true,

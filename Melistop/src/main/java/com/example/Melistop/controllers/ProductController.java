@@ -36,14 +36,14 @@ public class ProductController {
         return "admin/products/product-list";
     }
 
-    @GetMapping("/add-product")
+    @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories());
         return "admin/products/add-product";
     }
 
-    @PostMapping("/add-product")
+    @PostMapping("/add")
     public String addProduct(@Valid @ModelAttribute Product product,
                              BindingResult result,
                              @RequestParam("avatarFile") MultipartFile avatarFile,
@@ -88,7 +88,7 @@ public class ProductController {
         return "admin/products/update-product";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/edit/{id}")
     public String updateProduct(@PathVariable Long id,
                                 @Valid @ModelAttribute Product product,
                                 BindingResult result,
@@ -140,12 +140,33 @@ public class ProductController {
         return "redirect:/admin/products";
     }
 
-    @GetMapping("/products/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String showProductDetail(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
         return "admin/products/product-detail";
+    }
+
+    @GetMapping("/restock/{id}")
+    public String showRestockForm(@PathVariable Long id, Model model) {
+        Product product = productService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
+        model.addAttribute("product", product);
+        return "admin/products/restock-product";
+    }
+
+    @PostMapping("/restock/{id}")
+    public String restockProduct(@PathVariable Long id,
+                                 @RequestParam("quantity") int quantity,
+                                 Model model) {
+        Product product = productService.getProductById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
+
+        product.setQuantity(product.getQuantity() + quantity);
+        productService.updateProduct(product);
+
+        return "redirect:/admin/products";
     }
 
     @GetMapping("/search")
@@ -154,6 +175,7 @@ public class ProductController {
         model.addAttribute("products", searchResults);
         return "admin/products/product-list"; // Template dùng cho admin
     }
+
 
     private String saveFile(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
