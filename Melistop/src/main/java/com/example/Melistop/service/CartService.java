@@ -83,4 +83,9 @@ public class CartService{
         }
 
     }
+
+    //Xoa toan bo san pham trong gio hang
+    public void clearCart(){
+        cartItems.clear();
+    }
 }

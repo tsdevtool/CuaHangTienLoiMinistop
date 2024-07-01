@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectElement = document.getElementById('delivery-time');
+            const startTime = new Date();
+
+            // Round up to the next 30 minutes
+            startTime.setMinutes(Math.ceil(startTime.getMinutes() / 30) * 30);
+            startTime.setSeconds(0);
+            startTime.setMilliseconds(0);
+
+            const times = [];
+
+            for (let i = 0; i < 48; i++) { // 48 increments of 30 minutes in 24 hours
+                const timeOption = new Date(startTime.getTime() + i * 30 * 60000);
+                times.push(timeOption);
+            }
+
+            times.forEach(time => {
+                const option = document.createElement('option');
+                option.value = time.toISOString();
+
+                // Format the time as shown in the image (e.g., "10h 30p")
+                const hours = time.getHours();
+                const minutes = time.getMinutes();
+                option.textContent = `${hours}h ${minutes < 10 ? '0' : ''}${minutes}p`;
+
+                selectElement.appendChild(option);
+            });
+        });
+    </script>
+</head>
+<body>
+<section layout:fragment="custom-content">
+    <form th:action="@{/order/submit}" method="post">
+        <div class="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-md">
+            <div class="flex justify-between mb-4">
+                <!-- User Information Section -->
+                <div class="w-1/2 pr-4">
+                    <h2 class="text-xl font-semibold mb-4">Thông tin người dùng</h2>
+                    <div class="mb-4">
+                        <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Địa chỉ nhận hàng</label>
+                        <input type="address" id="address" placeholder="Nhập địa chỉ nhận hàng của bạn" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Order Information Section -->
+                <div class="w-1/2 pl-4">
+                    <h2 class="text-xl font-semibold mb-4">Thông tin đặt hàng</h2>
+
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Ghi chú</label>
+                        <input type="description" id="description" placeholder="Nhập ghi chú cho đơn hàng" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex items-center mb-2">
+                            <input type="radio" id="immediate-delivery" name="delivery-option" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                            <label for="immediate-delivery" class="ml-3 block text-sm font-medium text-gray-700">Đặt hàng - Giao hàng ngay</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="scheduled-delivery" name="delivery-option" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                            <label for="scheduled-delivery" class="ml-3 block text-sm font-medium text-gray-700">Nhận hàng - Nhận hàng hẹn giờ</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="delivery-time" class="block text-sm font-medium text-gray-700 mb-2">Chọn giờ nhận hàng</label>
+                        <select id="delivery-time" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Chọn giờ nhận hàng</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods Section -->
+            <h2 class="text-xl font-semibold mb-4">Phương thức thanh toán</h2>
+
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="flex items-center">
+                    <input type="radio" id="momo" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                    <label for="momo" class="ml-3 block text-sm font-medium text-gray-700 flex items-center">
+                        <img src="https://img.dominos.vn/icon-payment-method-mo-mo.png" alt="MoMo" class="mr-2"> Ví MoMo
+                    </label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="cash" name="payment-method" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
+                    <label for="cash" class="ml-3 block text-sm font-medium text-gray-700">Tiền mặt</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">
+                    HOÀN TẤT THANH TOÁN
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+</body>
+</html>
