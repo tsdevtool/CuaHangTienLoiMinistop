@@ -9,7 +9,7 @@
         // Hàm thực hiện chuyển đổi và định dạng tiền tệ
         function formatCurrency() {
             // Lấy tất cả các phần tử <p> có lớp totalPrice
-            let priceElements = document.querySelectorAll('#totalPrice');
+            let priceElements = document.querySelectorAll('.totalPrice');
 
             // Duyệt qua từng phần tử và chuyển đổi nội dung từ chuỗi sang số thực và làm tròn thành số nguyên
             priceElements.forEach(function(element) {
@@ -130,8 +130,8 @@
                                         </div>
                                     </div>
                                     <div class="flex items-center max-[500px]:justify-center md:justify-end max-md:mt-3 h-full">
-                                        <p class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600"
-                                           th:text="${item.quantity * item.product.price}" id="totalPrice">
+                                        <p class="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-indigo-600  totalPrice"
+                                           th:text="${item.quantity * item.product.price}">
                                         </p>
                                     </div>
                                 </div>
@@ -170,8 +170,9 @@
                         Tổng đơn hàng</h2>
                     <div class="mt-8">
                         <div class="flex items-center justify-between pb-6">
-                            <p class="font-normal text-lg leading-8 text-black">3 Sản phẩm</p>
-                            <p class="font-medium text-lg leading-8 text-black">45.000 vnđ</p>
+                            <p class="font-normal text-lg leading-8 text-black" th:text="${quantity}"></p>
+                            <p class="font-normal text-lg leading-8 text-black" > Sản phẩm</p>
+                            <p class="font-medium text-lg leading-8 text-black totalPrice" th:text="${total}">45.000 vnđ</p>
                         </div>
                         <form>
                             <label class="flex items-center mb-1.5 text-gray-400 text-sm font-medium">Mã giảm giá
@@ -215,19 +216,19 @@
                                 </button>
                             </div>
                             <div class="flex items-center justify-between py-8">
-                                <p class="font-medium text-xl leading-8 text-black">3 Sản phẩm</p>
-                                <p class="font-semibold text-xl leading-8 text-indigo-600">45.000 vnđ</p>
+                                <p class="font-medium text-xl leading-8 text-black" th:text="${quantity}">3 Sản phẩm</p>
+                                <p class="font-medium text-xl leading-8 text-black"> Sản phẩm</p>
+                                <p class="font-semibold text-xl leading-8 text-indigo-600 totalPrice" th:text="${total}">45.000 vnđ</p>
                             </div>
-                            <button
-                                    class="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">
+                            <a href="/order/checkout"  class="w-full text-center bg-indigo-600 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-indigo-700">
                                 Thanh toán
-                            </button>
+                            </a>
                         </form>
-                        <div class="w-full md:min-w-[126px]">
-                            <img src="https://homepage.momocdn.net/blogscontents/momo-upload-api-220810110042-637957260425550228.webp"
-                                 alt=""
-                                 class="mx-auto"/>
-                        </div>
+<!--                        <div class="w-full md:min-w-[126px]">-->
+<!--                            <img src="https://homepage.momocdn.net/blogscontents/momo-upload-api-220810110042-637957260425550228.webp"-->
+<!--                                 alt=""-->
+<!--                                 class="mx-auto"/>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

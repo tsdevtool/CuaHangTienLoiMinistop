@@ -45,6 +45,14 @@ public class CartService{
         return cartItemRepository.findByUser(user);
     }
 
+    public double totalPrice(User user){
+        List<CartItem> cartItemList = getCartItemsForUser(user);
+        double sum = 0;
+        for(CartItem item : cartItemList)
+            sum += item.getQuantity()*item.getProduct().getPrice();
+        return sum;
+    }
+
 //    Xoa san pham trong cart
     @Transactional
     public void removeProductInCartOfUser(Long cartId, User user){
@@ -57,6 +65,24 @@ public class CartService{
                 cartItemRepository.deleteByIdAndUser(cartId,user);
             }else{
                 throw  new IllegalArgumentException("Nguoi dung khong khop nhau");
+            }
+        }else{
+            throw new IllegalArgumentException("Không tìm thấy đơn hàng có id" + cartId);
+        }
+
+    }
+
+    @Transactional
+    public void removeProductInCartOfUser2(Long cartId, User user){
+        Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartId);
+        if(cartItemOptional.isPresent()){
+            CartItem cartItem = cartItemOptional.get();
+            if(cartItem.getUser().equals(user)){
+                Product product = cartItem.getProduct();
+//                product.setQuantity(product.getQuantity() + cartItem.getQuantity());
+                cartItemRepository.deleteByIdAndUser(cartId,user);
+            }else{
+                throw  new IllegalArgumentException("Người dùng không khớp");
             }
         }else{
             throw new IllegalArgumentException("Không tìm thấy đơn hàng có id" + cartId);
@@ -82,5 +108,10 @@ public class CartService{
             throw new IllegalArgumentException("Không tìm thấy đơn hàng có id" + cartId);
         }
 
+    }
+
+    //Xoa toan bo san pham trong gio hang
+    public void clearCart(){
+        cartItems.clear();
     }
 }

@@ -37,12 +37,12 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/","/search", "/oauth/**", "/register",
-                                "/error","/","/uploads/**","/products/detail/**")
+                                "/error","/","/uploads/**","/products/detail/**","/checkout")
                         .permitAll() // Cho phép truy cập không cần xác thực.
 
                         .requestMatchers("admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
-                        .requestMatchers("/user/**", "/cart/**", "/addToCart/**","/removeFromCart/**","/reduceFromCart/**")  // Thêm đường dẫn liên quan đến giỏ hàng
+                        .requestMatchers("/user/**", "/cart/**", "/addToCart/**","/removeFromCart/**","/reduceFromCart/**","/order/**","/checkout")  // Thêm đường dẫn liên quan đến giỏ hàng
                         .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.

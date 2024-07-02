@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout.html}">
 <head>
     <title>Chi tiết sản phẩm</title>
@@ -146,7 +146,7 @@
                                       stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <span id="counter" class="text-4xl font-bold mx-4" th:text="${product.quantity}">1</span>
+                        <span id="counter" class="text-4xl font-bold mx-4">1</span>
                         <button onclick="increaseQuantity([[${product.id}]], [[${product.quantity}]])"
                                 class="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300">
                             <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
@@ -165,15 +165,17 @@
                         <span class="text-base">/ 1 món</span>
                     </div>
 
-                    <button type="button"
-                            class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:hover:bg-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                        </svg>
-                        Thêm vào giỏ
-                    </button>
+                    <form th:action="@{/cart/addToCart/{productId}(productId=${product.id})}" method="post" sec:authorize="isAuthenticated()">
+                        <button type="submit"
+                                class="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:hover:bg-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-3 h-5 w-5" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                            Thêm vào giỏ
+                        </button>
+                    </form>
                 </div>
 
                 <ul class="mt-8 space-y-2">

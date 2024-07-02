@@ -16,6 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -26,6 +27,10 @@ public class Order {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
+    private String receiveTime;
+    private String addressShip;
+    private String description;
+    private String delivery;
     private Double totalPrice;
     private Boolean status;
 
