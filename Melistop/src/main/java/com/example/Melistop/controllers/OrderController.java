@@ -52,7 +52,7 @@ public class OrderController {
 
     @GetMapping("/confirmation")
     public String orderConfirmation(Model model){
-        model.addAttribute("message","Cảm ơn bạn đã đặt hàng tại cửa hàng chúng tôi!");
+        model.addAttribute("message","Quý khách đã đặt hàng thành công. MINISTOP sẽ sớm liên hệ với quý khách sớm để bàn giao sản phẩm, dịch vụ.");
         return "users/order-confirmation";
     }
 

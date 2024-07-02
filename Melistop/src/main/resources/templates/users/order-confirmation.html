@@ -6,62 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh toán thành công</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
-        }
-        .checkmark {
-            font-size: 48px;
-            color: green;
-        }
-        .order-number {
-            color: #33aa33;
-            font-weight: bold;
-        }
-        .order-link {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .order-link:hover {
-            text-decoration: underline;
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 <section layout:fragment="custom-content">
-    <div class="container">
-        <div class="checkmark">✔️</div>
-        <h2>Thanh toán thành công</h2>
-        <p th:text="${message}" class="d-inline-block">
-            <button type="button" class="btn btn-success btn-sm ml-2">&#10003;</button>
-        </p>
-        <a href="/" class="btn">Tiếp tục mua hàng</a>
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center max-w-md">
+        <div class="text-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z" clip-rule="evenodd" />
+            </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-green-600 mt-4">Đặt hàng thành công</h2>
+        <p th:text="${message}" class="text-gray-600 mt-2">Đơn hàng của quý khách đã thanh toán thành công. MISA sẽ sớm liên hệ với quý khách sớm để bàn giao sản phẩm, dịch vụ.</p>
+        <a href="/" class="mt-6 px-4 py-2 bg-blue-600 text-white rounded">Tiếp tục mua hàng</a>
     </div>
 </section>
 </body>
