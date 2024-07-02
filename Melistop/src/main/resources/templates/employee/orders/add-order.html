@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thêm Đơn Hàng - Trang Quản Lý Sản Phẩm Cửa Hàng">
+  <meta name="keywords" content="Thêm Đơn Hàng, Quản Lý Sản Phẩm, Cửa Hàng">
+  <meta name="csrf-token" th:content="${_csrf.token}"/>
   <title>Thêm Đơn Hàng</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/employee-add-order.css">
-  <meta name="csrf-token" th:content="${_csrf.token}"/>
 </head>
 <body>
+<div class="back-button">
+  <button class="btn btn-secondary" onclick="history.back()">Quay lại</button>
+</div>
 <div class="container">
   <div class="content">
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Nhập thông tin sản phẩm hoặc mã sản phẩm cần tìm kiếm" oninput="searchProduct()">
-      <button onclick="searchProduct()">Tìm kiếm</button>
-    </div>
-
-    <div class="table-container">
-      <table>
+    <div class="table-container mt-3">
+      <table id="productTable" class="table table-striped">
         <thead>
         <tr>
           <th>Mã sản phẩm</th>
@@ -36,7 +39,7 @@
     </div>
   </div>
 
-  <div class="invoice">
+  <div class="invoice mt-5">
     <h2>Hóa đơn</h2>
     <ul id="invoice-list"></ul>
     <div class="total">
@@ -44,15 +47,27 @@
       <span id="total-amount">0</span>
     </div>
     <div class="checkout">
-      <select id="payment-method" name="paymentId">
+      <select id="payment-method" name="paymentId" class="form-control">
         <option th:each="payment : ${payments}" th:value="${payment.id}" th:text="${payment.name}"></option>
       </select>
-      <button type="button" onclick="goToCheckout()">Thanh toán</button>
+      <button type="button" class="btn btn-success" onclick="goToCheckout()">Thanh toán</button>
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+  $(document).ready(function() {
+      $('#productTable').DataTable({
+          "paging": true,
+          "searching": true,
+          "ordering": true,
+          "info": true
+      });
+  });
+
   let invoiceItems = JSON.parse(localStorage.getItem('invoiceItems')) || [];
 
   function toggleSelect(row) {
@@ -130,61 +145,60 @@
   }
 
   function goToCheckout() {
-  const totalAmount = parseFloat(document.getElementById('total-amount').textContent.replace(/[^\d.-]/g, ''));
-  const paymentMethod = document.getElementById('payment-method').value;
+      const totalAmount = parseFloat(document.getElementById('total-amount').textContent.replace(/[^\d.-]/g, ''));
+      const paymentMethod = document.getElementById('payment-method').value;
 
-  if (totalAmount <= 0) {
-      Swal.fire({
-          icon: 'error',
-          title: 'Lỗi',
-          text: 'Không có sản phẩm để thanh toán',
-          confirmButtonText: 'OK'
+      if (totalAmount <= 0) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Lỗi',
+              text: 'Không có sản phẩm để thanh toán',
+              confirmButtonText: 'OK'
+          });
+          return;
+      }
+
+      const formData = new FormData();
+      invoiceItems.forEach((item) => {
+          const barcode = parseInt(item.barcode, 10);
+          const quantity = parseInt(item.quantity, 10);
+          const price = parseFloat(item.itemPrice);
+
+          if (!isNaN(barcode) && !isNaN(quantity) && !isNaN(price)) {
+              formData.append('productIds', barcode);
+              formData.append('quantities', quantity);
+              formData.append('prices', price);
+          }
       });
-      return;
+
+      formData.append('paymentId', paymentMethod);
+
+      fetch('/employee/orders/add', {
+          method: 'POST',
+          body: formData,
+          headers: {
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          const paymentMethodText = document.getElementById('payment-method').selectedOptions[0].text;
+          if (paymentMethodText === 'Momo') {
+              window.location.href = `/employee/orders/qr-code/momo`;
+          } else if (paymentMethodText === 'Ngân hàng') {
+              window.location.href = `/employee/orders/qr-code/nganhang`;
+          } else {
+              window.location.href = `/employee/orders/add`;
+          }
+      })
+      .catch(error => {
+          Swal.fire({
+              icon: 'success',
+              title: 'Thành công',
+              confirmButtonText: 'OK'
+          });
+      });
   }
-
-  const formData = new FormData();
-  invoiceItems.forEach((item) => {
-      const barcode = parseInt(item.barcode, 10);
-      const quantity = parseInt(item.quantity, 10);
-      const price = parseFloat(item.itemPrice);
-
-      if (!isNaN(barcode) && !isNaN(quantity) && !isNaN(price)) {
-          formData.append('productIds', barcode);
-          formData.append('quantities', quantity);
-          formData.append('prices', price);
-      }
-  });
-
-  formData.append('paymentId', paymentMethod);
-
-  fetch('/employee/orders/add', {
-      method: 'POST',
-      body: formData,
-      headers: {
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
-  })
-  .then(response => response.json())
-  .then(data => {
-      const paymentMethodText = document.getElementById('payment-method').selectedOptions[0].text;
-      if (paymentMethodText === 'Momo') {
-          window.location.href = `/employee/orders/qr-code/momo`;
-      } else if (paymentMethodText === 'Ngân hàng') {
-          window.location.href = `/employee/orders/qr-code/nganhang`;
-      } else {
-          window.location.href = `/employee/orders/add`;
-      }
-  })
-  .catch(error => {
-      Swal.fire({
-          icon: 'success',
-          title: 'Thành công',
-          confirmButtonText: 'OK'
-      });
-  });
-}
-
 
   document.addEventListener("DOMContentLoaded", function() {
       const currencyElements = document.querySelectorAll(".currency");
