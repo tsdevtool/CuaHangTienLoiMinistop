@@ -2343,3 +2343,31 @@ video {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
+
+
+
+.btn-add-to-cart {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #333;
+}
+
+.btn-add-to-cart:focus {
+    outline: none;
+}
+
+
+ .quantity-input {
+            margin-right: 10px; /* khoảng cách giữa ô nhập số lượng và nút */
+        }
