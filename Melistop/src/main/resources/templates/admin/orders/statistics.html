@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layoutemployee}">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+<section layout:fragment="custom-content">
+    <div class="container mt-5">
+        <h1>Revenue</h1>
+        <form th:action="@{/statictis}" method="get">
+            <button type="submit" value="daily" class="btn btn-outline-primary">Daily</button>
+<!--            <button type="submit" value="monthly" class="btn btn-outline-light">Monthly</button>-->
+        </form>
+
+        <table class="ordersTable table table-striped">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${show}">
+                <td th:text="${#dates.format(item.date, 'dd/MM/yyyy HH:mm')}">01/01/2024</td>
+                <td th:text="${item.total}">100.0</td>
+            </tr>
+            </tbody>
+        </table>
+
+<!--        <table  th:unless="${message}"class="ordersTable table table-striped">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Year</th>-->
+<!--                <th>Month</th>-->
+<!--                <th>Total</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="item : ${show}">-->
+<!--                <td th:text="${item.year}">01/01/2024</td>-->
+<!--                <td th:text="${item.month}">100.0</td>-->
+<!--                <td th:text="${order.revenue}">100.0</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.ordersTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
+            });
+        });
+    </script>
+</section>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.example.Melistop.controllers;
 
+import com.example.Melistop.DTO.DailyRevenue;
+import com.example.Melistop.DTO.MonthlyRevenue;
 import com.example.Melistop.models.Order;
 import com.example.Melistop.service.OrderManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/orders")
@@ -30,6 +33,23 @@ public class OrderManagementController {
         } else {
             return "redirect:/admin/orders";
         }
+    }
+
+    //Thong ke doanh thu
+    @GetMapping("/statictis")
+    public String showStatictis( Model model){
+//        if(type.equals("daily")){
+            model.addAttribute("message", true);
+            model.addAttribute("show", orderManagementService.getDailyRevenue());
+            return "admin/orders/statistics";
+//        }
+//        else{
+//            model.addAttribute("message", false);
+//            model.addAttribute("show", orderManagementService.getMonthlyRevenue());
+//            return "admin/orders/statistics";
+//        }
+
+
     }
 
 }
