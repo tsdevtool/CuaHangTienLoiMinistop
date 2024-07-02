@@ -42,6 +42,8 @@ public class SecurityConfig {
 
                         .requestMatchers("admin/**")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
+//                        .requestMatchers("employee/**")
+//                        .hasAnyAuthority("EMPLOYEE")
                         .requestMatchers("/user/**", "/cart/**", "/addToCart/**","/removeFromCart/**","/reduceFromCart/**","/order/**","/checkout")  // Thêm đường dẫn liên quan đến giỏ hàng
                         .hasAnyAuthority("USER")
                         .requestMatchers("/api/**")

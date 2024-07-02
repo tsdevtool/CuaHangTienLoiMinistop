@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
@@ -135,8 +136,14 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProductById(id);
+    public String deleteProduct(@PathVariable Long id, Model model) {
+        try {
+            productService.deleteProductById(id);
+        } catch (IllegalStateException e) {
+            model.addAttribute("errorMessage", "Sản phẩm này đã được đặt hàng và không thể xóa.");
+            model.addAttribute("products", productService.getAllProducts());
+            return "admin/products/product-list";
+        }
         return "redirect:/admin/products";
     }
 
@@ -176,7 +183,6 @@ public class ProductController {
         return "admin/products/product-list"; // Template dùng cho admin
     }
 
-
     private String saveFile(MultipartFile file) throws IOException {
         String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
         Path filePath = Paths.get("uploads", fileName);
@@ -185,3 +191,4 @@ public class ProductController {
         return fileName;
     }
 }
+

@@ -16,6 +16,7 @@
             <p><strong>Order Date:</strong> <span th:text="${#dates.format(order.orderDate, 'dd/MM/yyyy HH:mm')}"></span></p>
             <p><strong>Total Price:</strong> <span th:text="${order.totalPrice}"></span></p>
             <p><strong>Status:</strong> <span th:text="${order.status ? 'Delivered' : 'Pending'}"></span></p>
+            <p><strong>Payment:</strong> <span th:text="${order.payment.name}"></span></p>
         </div>
 
         <h3>Order Items:</h3>
@@ -38,7 +39,7 @@
             </tbody>
         </table>
 
-        <a class="btn btn-secondary" th:href="@{/employee/orders/list}">Back to Orders List</a>
+        <a class="btn btn-secondary" th:href="@{/employee}">Back to Orders List</a>
     </div>
 </section>
 </body>

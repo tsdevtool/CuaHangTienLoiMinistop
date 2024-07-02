@@ -16,6 +16,9 @@
 <section layout:fragment="custom-content">
     <div class="container mt-5">
         <h1>Categories List</h1>
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+            <p th:text="${errorMessage}"></p>
+        </div>
         <a class="btn btn-primary mb-3" th:href="@{/admin/categories/add}">Add New Category</a>
         <table id="categoryTable" class="table table-striped">
             <thead>

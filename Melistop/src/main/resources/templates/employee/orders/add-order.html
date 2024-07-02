@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Thêm Đơn Hàng</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/css/employee-add-order.css">
+  <meta name="csrf-token" th:content="${_csrf.token}"/>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Nhập thông tin sản phẩm hoặc mã sản phẩm cần tìm kiếm" oninput="searchProduct()">
+      <button onclick="searchProduct()">Tìm kiếm</button>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+        <tr>
+          <th>Mã sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Đơn vị tính</th>
+          <th>Đơn giá</th>
+        </tr>
+        </thead>
+        <tbody id="product-list">
+        <tr th:each="product : ${products}" onclick="toggleSelect(this)">
+          <td th:text="${product.id}">Mã sản phẩm</td>
+          <td th:text="${product.name}">Tên sản phẩm</td>
+          <td th:text="${product.description}">Đơn vị tính</td>
+          <td class="currency" th:text="${product.price}">Đơn giá</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="invoice">
+    <h2>Hóa đơn</h2>
+    <ul id="invoice-list"></ul>
+    <div class="total">
+      <span>Tổng cộng:</span>
+      <span id="total-amount">0</span>
+    </div>
+    <div class="checkout">
+      <select id="payment-method" name="paymentId">
+        <option th:each="payment : ${payments}" th:value="${payment.id}" th:text="${payment.name}"></option>
+      </select>
+      <button type="button" onclick="goToCheckout()">Thanh toán</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  let invoiceItems = JSON.parse(localStorage.getItem('invoiceItems')) || [];
+
+  function toggleSelect(row) {
+      const barcode = row.cells[0].innerText;
+      const itemName = row.cells[1].innerText;
+      const itemPrice = parseFloat(row.cells[3].innerText.replace(/[^\d.-]/g, '')).toFixed(0);
+
+      let item = invoiceItems.find(i => i.barcode === barcode);
+
+      if (item) {
+          item.quantity++;
+      } else {
+          invoiceItems.push({ barcode, itemName, itemPrice, quantity: 1 });
+      }
+
+      updateInvoice();
+  }
+
+  function updateQuantity(barcode, quantity) {
+      let item = invoiceItems.find(i => i.barcode === barcode);
+      if (item) {
+          item.quantity = parseInt(quantity);
+          updateInvoice();
+      }
+  }
+
+  function removeItem(barcode) {
+      invoiceItems = invoiceItems.filter(item => item.barcode !== barcode);
+      updateInvoice();
+  }
+
+  function updateInvoice() {
+      const invoiceList = document.getElementById('invoice-list');
+      const totalAmount = document.getElementById('total-amount');
+      let total = 0;
+
+      invoiceList.innerHTML = '';
+
+      invoiceItems.forEach(item => {
+          const itemTotalPrice = parseFloat(item.itemPrice) * item.quantity;
+          total += itemTotalPrice;
+
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `
+              <div class="item-details">
+                  <div>${item.itemName}</div>
+                  <div>
+                      <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.barcode}', this.value)">
+                  </div>
+                  <div>- Giá: ${itemTotalPrice.toLocaleString()}</div>
+                  <div><i class="fas fa-trash-alt delete-icon" onclick="removeItem('${item.barcode}')"></i></div>
+              </div>
+          `;
+          invoiceList.appendChild(listItem);
+      });
+
+      totalAmount.textContent = total.toLocaleString();
+      localStorage.setItem('invoiceItems', JSON.stringify(invoiceItems));
+  }
+
+  function searchProduct() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#product-list tr');
+
+      rows.forEach(row => {
+          const barcode = row.cells[0].innerText.toLowerCase();
+          const itemName = row.cells[1].innerText.toLowerCase();
+
+          if (barcode.includes(query) || itemName.includes(query)) {
+              row.style.display = '';
+          } else {
+              row.style.display = 'none';
+          }
+      });
+  }
+
+  function goToCheckout() {
+  const totalAmount = parseFloat(document.getElementById('total-amount').textContent.replace(/[^\d.-]/g, ''));
+  const paymentMethod = document.getElementById('payment-method').value;
+
+  if (totalAmount <= 0) {
+      Swal.fire({
+          icon: 'error',
+          title: 'Lỗi',
+          text: 'Không có sản phẩm để thanh toán',
+          confirmButtonText: 'OK'
+      });
+      return;
+  }
+
+  const formData = new FormData();
+  invoiceItems.forEach((item) => {
+      const barcode = parseInt(item.barcode, 10);
+      const quantity = parseInt(item.quantity, 10);
+      const price = parseFloat(item.itemPrice);
+
+      if (!isNaN(barcode) && !isNaN(quantity) && !isNaN(price)) {
+          formData.append('productIds', barcode);
+          formData.append('quantities', quantity);
+          formData.append('prices', price);
+      }
+  });
+
+  formData.append('paymentId', paymentMethod);
+
+  fetch('/employee/orders/add', {
+      method: 'POST',
+      body: formData,
+      headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      }
+  })
+  .then(response => response.json())
+  .then(data => {
+      const paymentMethodText = document.getElementById('payment-method').selectedOptions[0].text;
+      if (paymentMethodText === 'Momo') {
+          window.location.href = `/employee/orders/qr-code/momo`;
+      } else if (paymentMethodText === 'Ngân hàng') {
+          window.location.href = `/employee/orders/qr-code/nganhang`;
+      } else {
+          window.location.href = `/employee/orders/add`;
+      }
+  })
+  .catch(error => {
+      Swal.fire({
+          icon: 'success',
+          title: 'Thành công',
+          confirmButtonText: 'OK'
+      });
+  });
+}
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+      const currencyElements = document.querySelectorAll(".currency");
+      currencyElements.forEach(function(element) {
+          const value = parseFloat(element.textContent.replace(/[^\d.-]/g, '')).toFixed(0);
+          if (!isNaN(value)) {
+              element.textContent = value.toLocaleString();
+          }
+      });
+
+      updateInvoice();
+  });
+</script>
+</body>
+</html>

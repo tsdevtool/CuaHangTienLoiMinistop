@@ -1,6 +1,7 @@
 package com.example.Melistop.service;
 
 import com.example.Melistop.repository.ImageRepository;
+import com.example.Melistop.repository.OrderDetailRepository;
 import com.example.Melistop.repository.ProductRepository;
 import com.example.Melistop.models.Image;
 import com.example.Melistop.models.Product;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ImageRepository imageRepository;
-
+    private final OrderDetailRepository orderDetailRepository;
     // Retrieve all products from the database
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -54,6 +55,13 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new IllegalStateException("Product with ID " + id + " does not exist.");
         }
+
+        // Kiểm tra xem sản phẩm có tồn tại trong bất kỳ OrderDetail nào không
+        boolean isOrdered = orderDetailRepository.existsByProductId(id);
+        if (isOrdered) {
+            throw new IllegalStateException("Cannot delete product with ID " + id + " because it has been ordered.");
+        }
+
         productRepository.deleteById(id);
     }
 

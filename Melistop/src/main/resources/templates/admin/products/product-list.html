@@ -13,15 +13,13 @@
 <section layout:fragment="custom-content">
   <div class="container mt-5">
     <h1>Products List</h1>
+    <!-- Thông báo lỗi -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+      <span th:text="${errorMessage}"></span>
+    </div>
     <div>
       <a th:href="@{/admin/products/add}" class="btn btn-primary mb-3">Add New Product</a>
     </div>
-    <form th:action="@{/admin/products/search}" method="get" class="mb-3">
-      <div class="input-group">
-        <input type="text" name="name" class="form-control" placeholder="Search by name...">
-        <button type="submit" class="btn btn-primary">Search</button>
-      </div>
-    </form>
     <table id="productTable" class="table table-striped">
       <thead>
       <tr>

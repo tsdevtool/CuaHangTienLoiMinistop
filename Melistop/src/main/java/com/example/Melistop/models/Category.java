@@ -3,6 +3,9 @@ package com.example.Melistop.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+
+import java.util.List;
+
 @Setter
 @Getter
 @RequiredArgsConstructor
@@ -15,4 +18,6 @@ public class Category {
     private Long id;
     @NotBlank(message = "Tên là bắt buộc")
     private String name;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products;
 }
